@@ -94,8 +94,11 @@ mvn spring-boot:run     # app su http://localhost:8080
 ## 6. Come lavora la squadra
 
 Orchestratore = il thread principale. Gli agenti stanno in `.claude/agents/`, i workflow di
-fase in `.claude/skills/`. Mappa completa con dipendenze e ordine: `docs/AGENT-TEAM.md`.
-Tabella di marcia: `docs/PLAN.md`.
+fase in `.claude/skills/`.
+
+- **Come si lancia, passo per passo: `docs/GUIDA-OPERATIVA.md`** (comandi e prompt pronti)
+- Mappa della squadra, perimetri e dipendenze: `docs/AGENT-TEAM.md`
+- Tabella di marcia e budget di tempo: `docs/PLAN.md`
 
 Ordine non negoziabile: **`contract-architect` prima di tutti i builder.** I contratti sono
 il vocabolario condiviso; senza di essi gli agenti in parallelo divergono e il merge costa

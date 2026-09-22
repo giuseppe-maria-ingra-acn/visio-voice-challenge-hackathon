@@ -81,6 +81,9 @@ Mappa della squadra e ordine di lancio: [docs/AGENT-TEAM.md](docs/AGENT-TEAM.md)
 
 ## Avvio
 
+**Tutti i passi, in ordine, con i comandi da copiare:
+[docs/GUIDA-OPERATIVA.md](docs/GUIDA-OPERATIVA.md).**
+
 Serve Java 17 e Maven. Nessuna chiave API: il client LLM ha un mock deterministico su
 fixture, ed è il default — la demo non dipende dalla rete.
 
