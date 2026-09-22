@@ -63,6 +63,34 @@ l'utente lo sente. Specifica e casi di test: [docs/PROVENANCE-SPEC.md](docs/PROV
 una parafrasi semanticamente sbagliata con i numeri giusti ("entro il 30 giugno" → "dopo il
 30 giugno"). Quello resta revisione umana, ed è tracciato in `docs/AI-CONTRIBUTION.md`.
 
+## Che forma ha
+
+Un livello accessibile che **ripara la pagina dall'interno**, invece di essere una seconda
+applicazione in cui ridigitare tutto. Marco compila il form del sito; il protocollo che sente
+alla fine è la risposta del sito al suo invio, non un numero generato da noi.
+
+```
+Marco  ->  pagina del servizio  +  livello VisioVoice
+                                        |  HTTP localhost:8080
+                                        v
+                       backend Java: percezione, narrazione,
+                       gate di fidelity, validatori, provenance
+                                        |
+                                        v
+                          DOM accessibile iniettato nella pagina
+                                        |
+                                        v
+                   NVDA lo legge dall'albero di accessibilita'
+```
+
+Su NVDA non c'è nulla da integrare: non espone un'API, legge l'albero di accessibilità che il
+browser pubblica. Un `<table>` vero al posto di un'immagine, una `<label>` sul campo IBAN e
+una regione `aria-live` **sono** l'integrazione — e funzionano anche con JAWS e VoiceOver.
+
+La stessa logica (`visiovoice.js`) è consegnata in due modi: inclusa dalla pagina (zero setup)
+oppure caricata come estensione MV3 (la forma vera del prodotto, perché funziona anche su
+pagine che non controlliamo). Il backend Java è identico.
+
 ## Come si sviluppa
 
 Il progetto è costruito da una squadra di agenti specializzati, ognuno con un perimetro di

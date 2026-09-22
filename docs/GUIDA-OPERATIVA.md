@@ -160,7 +160,7 @@ Oppure a mano, **tutti in un solo messaggio**:
 > - `perception-engineer` → `perception/`
 > - `narration-engineer` → `narration/`, `llm/`, `resources/fixtures/`
 > - `procedure-engineer` → `procedure/`, `validation/`
-> - `a11y-frontend` → `resources/static/`
+> - `a11y-frontend` → `resources/static/visiovoice.js` + `extension/` (involucro MV3)
 >
 > A ciascuno aggiungi: leggi `CLAUDE.md` e `docs/PERSONA.md`, rispetta l'invariante di
 > `docs/PROVENANCE-SPEC.md`, i dati di dominio si leggono da
@@ -179,8 +179,24 @@ Gli hook si occupano della compilazione e degli invarianti. A voi restano due co
 
 ```bash
 mvn -q test && echo "TUTTI I TEST VERDI"
-mvn spring-boot:run          # poi aprite http://localhost:8080
+mvn spring-boot:run
 ```
+
+Poi aprite **`http://localhost:8080/demo/`** — non la radice. È la replica del servizio, con
+`visiovoice.js` già incluso: è il percorso della demo e non richiede alcun setup.
+
+### Provare anche il veicolo "estensione" (facoltativo, 2 minuti)
+
+Serve solo a mostrare la forma vera del prodotto. Su questa macchina le policy aziendali non
+lo impediscono: i blocklist di Chrome ed Edge elencano ID specifici, non un blocco generale.
+
+1. `chrome://extensions` (o `edge://extensions`)
+2. attivate **Modalità sviluppatore**
+3. **Carica estensione non pacchettizzata** → scegliete la cartella `extension/`
+4. ricaricate `http://localhost:8080/demo/`
+
+Il comportamento deve essere **identico** al veicolo incluso: è lo stesso file. Se differisce,
+qualcuno ha duplicato la logica dentro `extension/` — va rimossa, o le due copie divergeranno.
 
 ---
 
@@ -301,6 +317,29 @@ mvn -q dependency:go-offline
 ```
 
 Se fallisce siete dietro un proxy. Controllate `~/.m2/settings.xml`.
+
+### L'estensione non si carica, o si comporta diversamente
+
+Non blocca la demo: il percorso principale è `http://localhost:8080/demo/`, dove
+`visiovoice.js` è incluso dalla pagina e non dipende dal browser.
+
+Se si carica ma **si comporta in modo diverso**, la causa è quasi sempre una di queste due:
+
+```bash
+grep -rn "chrome\." src/main/resources/static/visiovoice.js   # atteso: vuoto
+ls extension/                                                  # atteso: solo manifest.json e loader.js
+```
+
+La logica non deve usare `chrome.*` (nel veicolo estensione gira nel contesto della pagina,
+dove quelle API non esistono), e `extension/` non deve contenere una copia di
+`visiovoice.js`: una seconda copia va fuori sincrono in poco tempo.
+
+### Il submit della pagina non funziona più
+
+Qualcuno ha sostituito un controllo del form invece di annotarlo. È la regola che
+`a11y-frontend` non può violare: gli interventi sono **additivi o in-place**. Se il submit si
+rompe, il protocollo finale torna a essere un numero inventato da noi, e il progetto perde
+la cosa che lo distingue da una demo finta.
 
 ### Due agenti si sono sovrascritti a vicenda
 

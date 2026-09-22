@@ -58,20 +58,24 @@ modo di capire che c'e' un errore.
 
 ## Il percorso che vogliamo consegnargli
 
-1. Apre la pagina con VisioVoice. Sente **cosa c'e'**: quante sezioni, quanti passi, cosa serve.
+0. Apre **la pagina del servizio**, quella di sempre. Non una seconda applicazione:
+   VisioVoice lavora dentro quella pagina e la ripara.
+1. Sente **cosa c'e'**: quante sezioni, quanti passi, cosa serve.
 2. Chiede la tabella degli importi. La sente **come dati**, non come "immagine":
    fasce, cifre, e la fascia in cui ricade lui.
 3. Comincia la procedura. A ogni campo sente **cosa scrivere, in che formato, con un esempio**.
 4. Sbaglia l'IBAN. Lo sente **subito**, con il motivo preciso, non dopo l'invio.
 5. Prima di inviare sente il **riepilogo** di cio' che ha compilato.
-6. Invia. Sente il **protocollo**, cifra per cifra, e se lo rilegge in braille.
+6. Invia **il form del sito**, non una nostra copia. Sente il **protocollo** che il servizio
+   gli restituisce, cifra per cifra, e se lo rilegge in braille.
 
 Ogni passo indica anche **da dove viene** l'informazione: letta dalla pagina, riformulata,
 o dedotta. Il punto 2 e' quello che nessun altro strumento gli da' oggi.
 
 ## Come misuriamo se funziona
 
-- [ ] Marco arriva al protocollo **senza chiedere aiuto a nessuno**
+- [ ] Marco arriva al protocollo **senza chiedere aiuto a nessuno**, e senza uscire dalla
+      pagina del servizio
 - [ ] Ogni cifra pronunciata e' ritrovabile nella fonte (`ProvenanceInvariantTest`)
 - [ ] Percorso completo **da sola tastiera**, mouse scollegato
 - [ ] Ogni cambio di stato e' **annunciato** (`aria-live`), non solo mostrato
