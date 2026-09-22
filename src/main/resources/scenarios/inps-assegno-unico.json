@@ -15,7 +15,8 @@
       "location": "Pagina informativa (index.html) — sezione 'Importi 2026', elemento <img src='importi-2026.png' alt='tabella importi'>",
       "screenReaderHears": "grafico    immagine    tabella importi",
       "whyBlocking": "Marco non puo' sapere quanto gli spetta per fascia ISEE. La tabella e' un PNG raster: non c'e' testo nel DOM, nessuna tabella HTML alternativa, nessun PDF accessibile. Per conoscere l'importo mensile deve chiedere aiuto a una persona vedente. E' esattamente la dipendenza che VisioVoice deve eliminare.",
-      "source": "Pattern WCAG 2.1 SC 1.1.1 (Non-text Content): immagini informative senza alternativa testuale. AgID Monitoraggio Accessibilita' 2024: 55,5% dei siti PA mancano di testo alternativo sufficiente per immagini informative (monitoraggio.accessibilita.agid.gov.it, consultato 2026-09-22). Barriera citata in PERSONA.md come barriera primaria. RICOSTRUITO per la demo."
+      "source": "Pattern WCAG 2.1 SC 1.1.1 (Non-text Content): immagini informative senza alternativa testuale. AgID Monitoraggio Accessibilita' 2024: 55,5% dei siti PA mancano di testo alternativo sufficiente per immagini informative (monitoraggio.accessibilita.agid.gov.it, consultato 2026-09-22). Barriera citata in PERSONA.md come barriera primaria. RICOSTRUITO per la demo.",
+      "fidelity": "RICOSTRUITO"
     },
     {
       "id": "b2",
@@ -23,7 +24,8 @@
       "location": "Step 4 (coordinate bancarie) — <input type='text' id='iban'> senza <label>, senza aria-label, senza aria-labelledby",
       "screenReaderHears": "modifica, vuoto",
       "whyBlocking": "Senza label o aria-label, NVDA annuncia solo il tipo e lo stato del campo. Marco non sa che deve inserire il codice IBAN ne' il formato richiesto (IT + 25 caratteri). Non c'e' altra guida nel DOM per questo campo.",
-      "source": "Pattern WCAG 2.1 SC 1.3.1 (Info and Relationships), SC 4.1.2 (Name, Role, Value). AgID Monitoraggio 2024: 48,2% dei campi input nei siti PA mancano di label accessibile (accessiway.com/blog/accessibilita-digitale-nelle-pa-i-dati-del-monitoraggio-agid, consultato 2026-09-22). Citato in PERSONA.md. RICOSTRUITO."
+      "source": "Pattern WCAG 2.1 SC 1.3.1 (Info and Relationships), SC 4.1.2 (Name, Role, Value). AgID Monitoraggio 2024: 48,2% dei campi input nei siti PA mancano di label accessibile (accessiway.com/blog/accessibilita-digitale-nelle-pa-i-dati-del-monitoraggio-agid, consultato 2026-09-22). Citato in PERSONA.md. RICOSTRUITO.",
+      "fidelity": "RICOSTRUITO"
     },
     {
       "id": "b3",
@@ -31,7 +33,8 @@
       "location": "Tutti i passi del form (step1.html–step5.html) — indicatore di avanzamento: <img src='step-indicator-N.png' alt='immagine'>",
       "screenReaderHears": "immagine",
       "whyBlocking": "Marco non sa a che passo si trova ne' quanti ne restano. L'indicatore visivo (cerchi pieni/vuoti '● ● ○ ○ ○') e' un PNG raster con alt='immagine'. Nessun testo nel DOM descrive lo stato corrente o il totale dei passi.",
-      "source": "Pattern WCAG 2.1 SC 1.1.1, SC 1.3.1. Stato del wizard come immagine e' citato esplicitamente in PERSONA.md come barriera del form INPS ('Non sa a che punto e' ne' quanti passi restano'). RICOSTRUITO."
+      "source": "Pattern WCAG 2.1 SC 1.1.1, SC 1.3.1. Stato del wizard come immagine e' citato esplicitamente in PERSONA.md come barriera del form INPS ('Non sa a che punto e' ne' quanti passi restano'). RICOSTRUITO.",
+      "fidelity": "RICOSTRUITO"
     },
     {
       "id": "b4",
@@ -39,7 +42,8 @@
       "location": "Step 1 (dati richiedente) — campo 'Data di nascita': griglia di <div role='button' aria-label=''> per i giorni del mese",
       "screenReaderHears": "pulsante",
       "whyBlocking": "NVDA annuncia 'pulsante' per ognuno dei 30+ div (role=button, aria-label vuoto). Marco non sa di essere in un calendario, non sa che mese e' visualizzato, non puo' selezionare il giorno con la tastiera (nessun handler keydown/keypress). La data e' obbligatoria e non c'e' alternativa testuale.",
-      "source": "Pattern WCAG 2.1 SC 4.1.2 (Name, Role, Value): componenti UI personalizzati senza nome accessibile. SC 2.1.1 (Keyboard): operazioni non raggiungibili da tastiera. Citato in PERSONA.md ('Calendario solo visuale: pulsante x30'). RICOSTRUITO."
+      "source": "Pattern WCAG 2.1 SC 4.1.2 (Name, Role, Value): componenti UI personalizzati senza nome accessibile. SC 2.1.1 (Keyboard): operazioni non raggiungibili da tastiera. Citato in PERSONA.md ('Calendario solo visuale: pulsante x30'). RICOSTRUITO.",
+      "fidelity": "RICOSTRUITO"
     },
     {
       "id": "b5",
@@ -47,59 +51,70 @@
       "location": "Step 4 (coordinate bancarie) — validazione IBAN: style='border-color:red' senza aria-live, senza role='alert', senza testo di errore nel DOM",
       "screenReaderHears": "",
       "whyBlocking": "Quando l'IBAN e' assente o formato non valido, il campo riceve solo un bordo rosso visivo. NVDA non annuncia nulla di nuovo. Marco invia il form, la pagina si aggiorna, e non sente alcun messaggio di errore: non sa perche' la procedura non avanza. E' la barriera definita 'piu' crudele' in PERSONA.md.",
-      "source": "Pattern WCAG 2.1 SC 1.4.1 (Use of Color): informazioni non trasmesse solo tramite colore. SC 3.3.1 (Error Identification): errori non identificati testualmente. AgID Monitoraggio 2024: 'l'uso esclusivo del colore per comunicare informazioni' e' tra i tre errori piu' frequenti (agid.gov.it, consultato 2026-09-22). Citato in PERSONA.md. RICOSTRUITO."
+      "source": "Pattern WCAG 2.1 SC 1.4.1 (Use of Color): informazioni non trasmesse solo tramite colore. SC 3.3.1 (Error Identification): errori non identificati testualmente. AgID Monitoraggio 2024: 'l'uso esclusivo del colore per comunicare informazioni' e' tra i tre errori piu' frequenti (agid.gov.it, consultato 2026-09-22). Citato in PERSONA.md. RICOSTRUITO.",
+      "fidelity": "RICOSTRUITO"
     }
   ],
   "sourceFacts": [
     {
       "id": "f1",
       "text": "203,80 euro al mese",
-      "ref": "Importo massimo per figlio minorenne (ISEE fino a 17.468,51 euro). Fonte: cafuilromaelazio.it e enacinforma.it citano INPS Circolare n. 7 del 30 gennaio 2026. URL: https://www.cafuilromaelazio.it/assegno-unico-universale-2026-importi-aggiornati-isee-e-istruzioni-operative/ (consultato 2026-09-22)"
+      "ref": "Importo massimo per figlio minorenne (ISEE fino a 17.468,51 euro). Fonte: cafuilromaelazio.it e enacinforma.it citano INPS Circolare n. 7 del 30 gennaio 2026. URL: https://www.cafuilromaelazio.it/assegno-unico-universale-2026-importi-aggiornati-isee-e-istruzioni-operative/ (consultato 2026-09-22)",
+      "provenance": "SOURCE_VERBATIM"
     },
     {
       "id": "f2",
       "text": "58,30 euro",
-      "ref": "Importo minimo per figlio (ISEE oltre 46.582,71 euro o senza ISEE). Fonte: enacinforma.it, cafuilromaelazio.it — INPS Circolare n. 7/2026. URL: https://www.enacinforma.it/assegno-unico-2026-importi-aggiornati-isee-marzo/ (consultato 2026-09-22)"
+      "ref": "Importo minimo per figlio (ISEE oltre 46.582,71 euro o senza ISEE). Fonte: enacinforma.it, cafuilromaelazio.it — INPS Circolare n. 7/2026. URL: https://www.enacinforma.it/assegno-unico-2026-importi-aggiornati-isee-marzo/ (consultato 2026-09-22)",
+      "provenance": "SOURCE_VERBATIM"
     },
     {
       "id": "f3",
       "text": "17.468,51 euro",
-      "ref": "Soglia ISEE per l'importo massimo 2026. Fonte: cafuilromaelazio.it — INPS Circolare n. 7 del 30 gennaio 2026. (consultato 2026-09-22)"
+      "ref": "Soglia ISEE per l'importo massimo 2026. Fonte: cafuilromaelazio.it — INPS Circolare n. 7 del 30 gennaio 2026. (consultato 2026-09-22)",
+      "provenance": "SOURCE_VERBATIM"
     },
     {
       "id": "f4",
       "text": "46.582,71 euro",
-      "ref": "Soglia ISEE oltre la quale si applica l'importo minimo 2026. Fonte: enacinforma.it, cafuilromaelazio.it — INPS Circolare n. 7/2026. (consultato 2026-09-22)"
+      "ref": "Soglia ISEE oltre la quale si applica l'importo minimo 2026. Fonte: enacinforma.it, cafuilromaelazio.it — INPS Circolare n. 7/2026. (consultato 2026-09-22)",
+      "provenance": "SOURCE_VERBATIM"
     },
     {
       "id": "f5",
       "text": "165,90 €",
-      "ref": "Importo mensile per figlio con ISEE di 25.000 euro. Fonte: informazionescuola.it (tabella parziale citante INPS Circolare n. 7/2026). URL: https://www.informazionescuola.it/tabella-assegno-unico-2026-pdf-nuovi-importi-circolare-inps-7/ (consultato 2026-09-22). Usato nella tabella PNG per la fascia 17.468,52–25.000 euro."
+      "ref": "Importo mensile per figlio con ISEE di 25.000 euro. Fonte: informazionescuola.it (tabella parziale citante INPS Circolare n. 7/2026). URL: https://www.informazionescuola.it/tabella-assegno-unico-2026-pdf-nuovi-importi-circolare-inps-7/ (consultato 2026-09-22). Usato nella tabella PNG per la fascia 17.468,52–25.000 euro.",
+      "provenance": "SOURCE_VERBATIM"
     },
     {
       "id": "f6",
       "text": "115,90 €",
-      "ref": "Importo mensile per figlio con ISEE di 35.000 euro. Fonte: informazionescuola.it (tabella parziale citante INPS Circolare n. 7/2026). (consultato 2026-09-22). Usato nella tabella PNG per la fascia 25.001–35.000 euro."
+      "ref": "Importo mensile per figlio con ISEE di 35.000 euro. Fonte: informazionescuola.it (tabella parziale citante INPS Circolare n. 7/2026). (consultato 2026-09-22). Usato nella tabella PNG per la fascia 25.001–35.000 euro.",
+      "provenance": "SOURCE_VERBATIM"
     },
     {
       "id": "f7",
       "text": "Circolare n. 7 del 30 gennaio 2026",
-      "ref": "Riferimento normativo INPS per gli importi 2026 dell'Assegno Unico Universale. Citato da piu' fonti secondarie."
+      "ref": "Riferimento normativo INPS per gli importi 2026 dell'Assegno Unico Universale. Citato da piu' fonti secondarie.",
+      "provenance": "SOURCE_VERBATIM"
     },
     {
       "id": "f8",
       "text": "+1,4%",
-      "ref": "Rivalutazione ISTAT (indice FOI) applicata a tutti gli importi AUU dal 1 gennaio 2026. Fonte: enacinforma.it, cafuilromaelazio.it. (consultato 2026-09-22)"
+      "ref": "Rivalutazione ISTAT (indice FOI) applicata a tutti gli importi AUU dal 1 gennaio 2026. Fonte: enacinforma.it, cafuilromaelazio.it. (consultato 2026-09-22)",
+      "provenance": "SOURCE_VERBATIM"
     },
     {
       "id": "f9",
       "text": "IT60X0542811101000000123456",
-      "ref": "IBAN di esempio per la demo. Formato: IT (2) + check (2) + ABI (5) + CAB (5) + conto (12) = 27 caratteri. RICOSTRUITO — valore fittizio per demo."
+      "ref": "IBAN di esempio per la demo. Formato: IT (2) + check (2) + ABI (5) + CAB (5) + conto (12) = 27 caratteri. RICOSTRUITO — valore fittizio per demo.",
+      "provenance": "AI_INFERRED"
     },
     {
       "id": "f10",
       "text": "INPS-AUU-2026-0001234",
-      "ref": "Numero di protocollo restituito dal submit della demo. RICOSTRUITO — formato realistico basato su convenzioni INPS online, non osservato direttamente."
+      "ref": "Numero di protocollo restituito dal submit della demo. RICOSTRUITO — formato realistico basato su convenzioni INPS online, non osservato direttamente.",
+      "provenance": "AI_INFERRED"
     }
   ],
   "procedure": [
@@ -108,7 +123,8 @@
       "title": "Pagina informativa — importi e requisiti",
       "requiredData": [],
       "fields": [],
-      "note": "La pagina mostra gli importi mensili per fascia ISEE come immagine raster (importi-2026.png, alt='tabella importi'). BARRIER b1 attiva qui."
+      "note": "La pagina mostra gli importi mensili per fascia ISEE come immagine raster (importi-2026.png, alt='tabella importi'). BARRIER b1 attiva qui.",
+      "completionCriterion": "Il passo e' completo quando hai ascoltato il contenuto e scelto di procedere."
     },
     {
       "step": 1,
@@ -147,7 +163,8 @@
           "required": true,
           "barrier": "b4"
         }
-      ]
+      ],
+      "completionCriterion": "Il passo e' completo quando hai compilato 4 campi obbligatori: Cognome, Nome, Codice fiscale, Data di nascita."
     },
     {
       "step": 2,
@@ -213,7 +230,8 @@
           "example": "22/06/2022",
           "required": true
         }
-      ]
+      ],
+      "completionCriterion": "Il passo e' completo quando hai compilato 8 campi obbligatori: Cognome figlio 1, Nome figlio 1, Codice fiscale figlio 1, Data di nascita figlio 1, Cognome figlio 2, Nome figlio 2, Codice fiscale figlio 2, Data di nascita figlio 2."
     },
     {
       "step": 3,
@@ -237,7 +255,8 @@
           "required": false
         }
       ],
-      "note": "Se l'ISEE non e' presentato o supera la soglia massima (46.582,71 euro), viene erogato l'importo minimo: 58,30 euro per figlio."
+      "note": "Se l'ISEE non e' presentato o supera la soglia massima (46.582,71 euro), viene erogato l'importo minimo: 58,30 euro per figlio.",
+      "completionCriterion": "Il passo e' completo quando hai ascoltato il contenuto e scelto di procedere."
     },
     {
       "step": 4,
@@ -253,9 +272,14 @@
           "example": "IT60X0542811101000000123456",
           "required": true,
           "barrier": "b2",
-          "accessibleNote": "Il campo NON ha label ne' aria-label. NVDA annuncia: 'modifica, vuoto'. Barrier b5 si attiva qui in caso di IBAN mancante: errore solo con bordo rosso, nessun annuncio."
+          "accessibleNote": "Il campo NON ha label ne' aria-label. NVDA annuncia: 'modifica, vuoto'. Barrier b5 si attiva qui in caso di IBAN mancante: errore solo con bordo rosso, nessun annuncio.",
+          "barriers": [
+            "b2",
+            "b5"
+          ]
         }
-      ]
+      ],
+      "completionCriterion": "Il passo e' completo quando hai compilato 1 campo obbligatorio: IBAN."
     },
     {
       "step": 5,
@@ -269,7 +293,19 @@
         "example": "INPS-AUU-2026-0001234",
         "note": "RICOSTRUITO — formato realistico. Il numero reale e' generato dal sistema INPS. In demo: generato lato client da JavaScript."
       },
-      "note": "Il pulsante 'Invia domanda' genera il numero di protocollo. In produzione invierebbe i dati al server INPS tramite POST autenticato con SPID."
+      "note": "Il pulsante 'Invia domanda' genera il numero di protocollo. In produzione invierebbe i dati al server INPS tramite POST autenticato con SPID.",
+      "completionCriterion": "Il passo e' completo quando hai ascoltato il contenuto e scelto di procedere."
+    }
+  ],
+  "computedFacts": [
+    {
+      "id": "c1",
+      "text": "331,80 euro",
+      "formula": "due volte 165,90 euro, per due figli minori",
+      "derivedFrom": [
+        "f5"
+      ],
+      "ref": "calcolo per il nucleo di Marco: nessuna fonte contiene questo totale"
     }
   ]
 }

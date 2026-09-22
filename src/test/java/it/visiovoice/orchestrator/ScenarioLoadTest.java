@@ -67,13 +67,20 @@ class ScenarioLoadTest {
     }
 
     @Test
-    @DisplayName("la barriera dichiarata su un campo si ritrova dall'id, in forma di lista")
+    @DisplayName("il campo IBAN dichiara entrambe le barriere che lo rendono inutilizzabile")
     void leBarriereDelCampoSonoUnaLista() {
         Scenario scenario = scenario();
         ScenarioField iban = scenario.step(4).orElseThrow().field("iban").orElseThrow();
 
-        assertEquals(List.of("b2"), iban.barrierIds());
+        // Due barriere distinte sullo stesso campo, e servono entrambe:
+        //   b2 - non ha nome accessibile, quindi Marco non sa cosa scriverci
+        //   b5 - l'errore e' segnalato dal solo colore, quindi non sa perche' e' stato rifiutato
+        // Ripararne una sola lascia il campo inservibile: sapere cosa scrivere senza sapere
+        // di aver sbagliato, o saperlo senza sapere cosa scrivere.
+        assertEquals(List.of("b2", "b5"), iban.barrierIds(),
+                "il campo IBAN attiva due barriere: dichiararne una sola le nasconde al codice");
         assertTrue(scenario.barrier("b2").isPresent());
+        assertTrue(scenario.barrier("b5").isPresent());
     }
 
     @Test
