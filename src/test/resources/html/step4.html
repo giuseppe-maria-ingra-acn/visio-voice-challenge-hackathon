@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Passo 4 — Coordinate bancarie — Assegno Unico INPS (Replica demo)</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+<div class="page-header">
+  <span class="logo-inps">INPS</span>
+  <span class="site-title">Istituto Nazionale della Previdenza Sociale</span>
+</div>
+
+<div class="page-content">
+  <h1 class="page-title">Domanda Assegno Unico Universale</h1>
+
+  <!--
+    BARRIER b3 — VISUAL_ONLY_STATE (step indicator)
+    PNG raster con alt="immagine". Marco non sa di essere al passo 4 di 5.
+  -->
+  <div class="step-bar">
+    <img src="step-indicator-4.png" alt="immagine">
+  </div>
+
+  <h2 class="section-title">Passo 4 — Coordinate bancarie</h2>
+
+  <div class="info-box">
+    Inserire l'IBAN del conto corrente intestato o cointestato al richiedente.
+    L'assegno verra' accreditato mensilmente su questo conto.
+  </div>
+
+  <form id="form-step4" novalidate>
+    <fieldset>
+      <legend>Dati bancari</legend>
+
+      <!--
+        BARRIER b2 — UNLABELED_INPUT
+        L'input IBAN NON ha <label>, NON ha aria-label, NON ha aria-labelledby.
+        NVDA annuncia: "modifica, vuoto"
+        Marco non sa che si tratta del campo IBAN ne' il formato atteso.
+
+        BARRIER b5 — ERROR_NOT_ANNOUNCED
+        Se l'IBAN e' vuoto o non valido, la funzione valida() applica
+        style="border-color:red" al campo. Non viene aggiunto nessun
+        aria-live, nessun role="alert", nessun testo di errore nel DOM.
+        NVDA non annuncia nulla. Marco non sa perche' la procedura non avanza.
+      -->
+      <div class="form-group">
+        <!-- Nessuna <label> qui — intenzionale per replicare la barriera b2 -->
+        <input type="text" id="iban" name="iban"
+               placeholder="es. IT60X0542811101000000123456"
+               maxlength="27"
+               style="font-family:monospace; font-size:1rem; max-width:520px;"
+               autocomplete="off">
+        <!--
+          Il messaggio di errore sotto e' mostrato/nascosto con display:none/block
+          ma NON ha role="alert" ne' aria-live. NVDA non lo annuncia.
+          (Barrier b5)
+        -->
+        <div id="errore-iban"
+             style="display:none; color:red; font-size:0.82rem; margin-top:4px;">
+          Verificare il codice IBAN inserito.
+        </div>
+      </div>
+
+    </fieldset>
+
+    <div class="footer-nav">
+      <a href="step3.html">
+        <button type="button" class="btn-secondary">&#8592; Indietro</button>
+      </a>
+      <button type="button" class="btn-primary" onclick="valida()">
+        Avanti &#8594;
+      </button>
+    </div>
+  </form>
+
+  <div class="nota-replica">
+    <strong>REPLICA DEMO</strong> — Barriere b2 e b5 attive qui.<br>
+    b2: il campo IBAN non ha label — NVDA: "modifica, vuoto".<br>
+    b5: in caso di IBAN vuoto o malformato, solo il bordo diventa rosso; nessun aria-live.
+    NVDA non annuncia l'errore.
+  </div>
+</div>
+
+<script>
+function valida() {
+  var campo = document.getElementById('iban');
+  var errore = document.getElementById('errore-iban');
+  var valore = campo.value.trim().toUpperCase().replace(/\s/g, '');
+
+  // Validazione minima: deve iniziare con IT e avere 27 caratteri
+  var valido = valore.length === 27 && valore.startsWith('IT');
+
+  if (!valido) {
+    /*
+      BARRIER b5 — ERROR_NOT_ANNOUNCED
+      Solo il bordo cambia colore. Nessun aria-live, nessun role="alert".
+      NVDA non annuncia nulla.
+    */
+    campo.style.borderColor = 'red';
+    errore.style.display = 'block';
+    // Nessuna chiamata a aria-live, nessun focus spostato sul messaggio di errore
+  } else {
+    campo.style.borderColor = '';
+    errore.style.display = 'none';
+    window.location.href = 'step5.html';
+  }
+}
+</script>
+
+<script src="/visiovoice.js"></script>
+</body>
+</html>

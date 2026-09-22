@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Passo 1 — Dati del richiedente — Assegno Unico INPS (Replica demo)</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+<div class="page-header">
+  <span class="logo-inps">INPS</span>
+  <span class="site-title">Istituto Nazionale della Previdenza Sociale</span>
+</div>
+
+<div class="page-content">
+  <h1 class="page-title">Domanda Assegno Unico Universale</h1>
+
+  <!--
+    BARRIER b3 — VISUAL_ONLY_STATE (step indicator)
+    L'avanzamento e' un PNG raster con alt="immagine".
+    NVDA annuncia: "immagine"
+    Marco non sa di essere al passo 1 di 5 ne' quanti passi restano.
+  -->
+  <div class="step-bar">
+    <img src="step-indicator-1.png" alt="immagine">
+  </div>
+
+  <h2 class="section-title">Passo 1 — Dati anagrafici del richiedente</h2>
+
+  <form id="form-step1" novalidate>
+    <fieldset>
+      <legend>Dati personali</legend>
+
+      <div class="form-group">
+        <label for="cognome">Cognome *</label>
+        <input type="text" id="cognome" name="cognome" value="Ferrari" autocomplete="family-name">
+      </div>
+
+      <div class="form-group">
+        <label for="nome">Nome *</label>
+        <input type="text" id="nome" name="nome" value="Marco" autocomplete="given-name">
+      </div>
+
+      <div class="form-group">
+        <label for="cf_richiedente">Codice fiscale *</label>
+        <input type="text" id="cf_richiedente" name="cf_richiedente"
+               value="FRRMRC85C15A944S" maxlength="16" autocomplete="off"
+               style="text-transform:uppercase; font-family:monospace; font-size:1rem;">
+      </div>
+
+      <!--
+        BARRIER b4 — VISUAL_ONLY_STATE (calendario)
+        La data di nascita si seleziona tramite una griglia di <div role="button" aria-label="">
+        che rappresentano i giorni del mese di marzo 1985.
+        NVDA, navigando con il cursore virtuale, annuncia "pulsante" per ognuno dei 31 giorni
+        (aria-label="" sovrascrive il testo numerico visibile come nome accessibile).
+        Non esiste <input type="date"> ne' alternativa da tastiera.
+      -->
+      <div class="form-group">
+        <label>Data di nascita * <span style="font-weight:normal;color:#666;">(selezionare nel calendario)</span></label>
+        <div class="calendar-wrapper">
+          <div class="calendar-nav">Marzo 1985</div>
+          <div class="calendar-daynames">
+            <span>Lu</span><span>Ma</span><span>Me</span>
+            <span>Gi</span><span>Ve</span><span>Sa</span><span>Do</span>
+          </div>
+          <div class="calendar-grid">
+            <!-- Marzo 1985: 1 marzo = venerdì (col 5) -->
+            <div class="empty" role="button" aria-label=""></div>
+            <div class="empty" role="button" aria-label=""></div>
+            <div class="empty" role="button" aria-label=""></div>
+            <div class="empty" role="button" aria-label=""></div>
+            <div role="button" aria-label="" onclick="seleziona(this)">1</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">2</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">3</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">4</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">5</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">6</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">7</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">8</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">9</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">10</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">11</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">12</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">13</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">14</div>
+            <div role="button" aria-label="" onclick="seleziona(this)" class="selected">15</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">16</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">17</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">18</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">19</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">20</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">21</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">22</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">23</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">24</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">25</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">26</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">27</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">28</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">29</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">30</div>
+            <div role="button" aria-label="" onclick="seleziona(this)">31</div>
+          </div>
+        </div>
+        <!-- Input nascosto per portare il valore al passo successivo (non annunciato) -->
+        <input type="hidden" id="data_nascita" name="data_nascita" value="15/03/1985">
+      </div>
+
+    </fieldset>
+
+    <div class="footer-nav">
+      <a href="index.html">
+        <button type="button" class="btn-secondary">&#8592; Indietro</button>
+      </a>
+      <button type="button" class="btn-primary" onclick="avanti()">Avanti &#8594;</button>
+    </div>
+  </form>
+
+  <div class="nota-replica">
+    <strong>REPLICA DEMO</strong> — Barriera b4 attiva: il calendario e' composto da
+    &lt;div role="button" aria-label=""&gt;. NVDA annuncia "pulsante" per ognuno dei 31 giorni
+    senza nome. Non esiste percorso da tastiera per selezionare la data.
+  </div>
+</div>
+
+<script>
+function seleziona(el) {
+  document.querySelectorAll('.calendar-grid div.selected')
+    .forEach(function(d) { d.classList.remove('selected'); });
+  el.classList.add('selected');
+  document.getElementById('data_nascita').value =
+    el.textContent.trim().padStart(2,'0') + '/03/1985';
+}
+
+function avanti() {
+  window.location.href = 'step2.html';
+}
+</script>
+
+<script src="/visiovoice.js"></script>
+</body>
+</html>

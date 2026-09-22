@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Assegno Unico e Universale — INPS (Replica demo)</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+<div class="page-header">
+  <span class="logo-inps">INPS</span>
+  <span class="site-title">Istituto Nazionale della Previdenza Sociale</span>
+</div>
+
+<div class="page-content">
+  <h1 class="page-title">Assegno Unico e Universale per i figli a carico</h1>
+
+  <div class="info-box">
+    <strong>A chi spetta:</strong> A tutti i nuclei familiari con figli a carico minorenni,
+    o maggiorenni fino a 21 anni che studiano o cercano lavoro.
+    Non e' richiesta attivita' lavorativa da parte del richiedente.
+  </div>
+
+  <h2 class="section-title">Importi mensili 2026</h2>
+
+  <p style="font-size:0.9rem; color:#444; margin-bottom:12px;">
+    Gli importi per l'anno 2026 sono stati rivalutati del <strong>+1,4%</strong>
+    in base all'indice ISTAT (INPS Circolare n.&nbsp;7 del 30&nbsp;gennaio&nbsp;2026).
+  </p>
+
+  <!--
+    BARRIER b1 — IMAGE_ONLY_DATA
+    La tabella degli importi e' un PNG raster. alt="tabella importi" non trasmette i dati.
+    NVDA annuncia: "grafico    immagine    tabella importi"
+    Marco non puo' leggere nessun valore: non sa quanto gli spetta.
+  -->
+  <div class="tabella-importi">
+    <img src="importi-2026.png" alt="tabella importi">
+  </div>
+
+  <h2 class="section-title">Come fare domanda</h2>
+
+  <p style="font-size:0.9rem; margin-bottom:8px;">
+    La domanda si presenta esclusivamente online attraverso il portale INPS,
+    accedendo con <strong>SPID</strong>, <strong>CIE</strong> o <strong>CNS</strong>.
+    E' necessario disporre di un <strong>ISEE in corso di validita'</strong>
+    (DSU presentata presso un CAF o direttamente su inps.it).
+  </p>
+
+  <p style="font-size:0.9rem; margin-bottom:8px;">
+    La procedura si compone di <strong>5 passi</strong>:
+    dati del richiedente, dati dei figli, situazione ISEE, coordinate bancarie, riepilogo e invio.
+  </p>
+
+  <p style="font-size:0.9rem; margin-bottom:20px;">
+    All'invio viene rilasciato un numero di protocollo che attesta la ricezione della domanda.
+  </p>
+
+  <a href="step1.html" class="cta-btn">Presenta la domanda</a>
+
+  <div class="nota-replica">
+    <strong>REPLICA DEMO — NON e' il sito INPS live.</strong>
+    Questa pagina riproduce fedelmente le barriere di accessibilita' documentate nei portali PA.
+    Fonte: docs/EVIDENCE.md. Senza chiave API il servizio di descrizione immagini girera'
+    su fixture registrate, non su un modello LLM dal vivo.
+  </div>
+</div>
+
+<script src="/visiovoice.js"></script>
+</body>
+</html>
