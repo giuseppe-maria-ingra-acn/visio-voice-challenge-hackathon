@@ -1,0 +1,2 @@
+Sei al passo {{passo}} di {{totale}} della domanda. I passi sono: dati del richiedente,
+dati dei figli, situazione ISEE, coordinate bancarie, riepilogo e invio.

@@ -1,0 +1,18 @@
+{
+  "assetId": "importi-2026",
+  "summary": "La tabella riporta l'importo mensile dell'assegno per ogni figlio, diviso in quattro fasce di ISEE. La prima fascia arriva fino a 17.468,51 euro e da' 203,80 euro al mese per figlio; la seconda va da 17.468,52 a 25.000,00 euro e da' 165,90 euro; la terza va da 25.001,00 a 35.000,00 euro e da' 115,90 euro; oltre 46.582,71 euro, o senza ISEE, l'importo e' 58,30 euro. Tutti gli importi sono rivalutati del +1,4% rispetto all'anno precedente.",
+  "sourceRefs": ["f1", "f2", "f3", "f4", "f5", "f6", "f8"],
+  "tables": [
+    {
+      "caption": "Importo mensile per figlio, per fascia di ISEE",
+      "headers": ["Fascia ISEE", "Importo mensile per figlio"],
+      "rows": [
+        ["fino a 17.468,51 euro", "203,80 euro"],
+        ["da 17.468,52 a 25.000,00 euro", "165,90 euro"],
+        ["da 25.001,00 a 35.000,00 euro", "115,90 euro"],
+        ["oltre 46.582,71 euro o senza ISEE", "58,30 euro"]
+      ],
+      "sourceRefs": ["f1", "f2", "f3", "f4", "f5", "f6"]
+    }
+  ]
+}

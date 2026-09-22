@@ -1,0 +1,2 @@
+Risposta registrata di prova. Serve solo a dimostrare che il client dei modelli
+risponde da disco, senza rete e senza chiavi. Il valore di prova e' {{eco}}.
