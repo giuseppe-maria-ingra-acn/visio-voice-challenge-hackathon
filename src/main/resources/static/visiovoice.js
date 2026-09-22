@@ -74,6 +74,7 @@
                   'photo', 'icona', 'icon', 'logo', 'tabella', 'spacer', 'banner'];
 
   var stato = {
+    voceAttiva: true,
     sessionId: null,
     ultimaFrase: '',
     ultimaOrigine: null,
@@ -151,6 +152,7 @@
     var radice = nuovo('div', 'vv-radice');
     radice.setAttribute('data-vv', 'radice');
 
+    preparaVoce();
     regioneCalma = nuovo('div', 'vv-solo-lettore');
     regioneCalma.id = 'vv-annuncio';
     regioneCalma.setAttribute('role', 'status');
@@ -195,8 +197,55 @@
     }, 60);
   }
 
-  function annuncia(frase, origine) { scrivi(regioneCalma, frase, origine); }
-  function allarme(frase, origine) { scrivi(regioneUrgente, frase, origine); }
+  // ── Voce ──────────────────────────────────────────────────────────────────
+  // Le regioni aria-live sono il canale vero: uno screen reader le legge, ed e' quello
+  // che Marco usa davvero perche' e' configurato come vuole lui. Ma su una macchina
+  // senza screen reader restano MUTE, e chi guarda la demo non sente niente.
+  // Questa sintesi e' quindi un extra, non il canale principale, e si puo' spegnere.
+
+  var vocePronta = false;
+  var voceItaliana = null;
+
+  function preparaVoce() {
+    if (!('speechSynthesis' in window)) { return; }
+    var scegli = function () {
+      var voci = window.speechSynthesis.getVoices() || [];
+      for (var i = 0; i < voci.length; i++) {
+        if (voci[i].lang && voci[i].lang.toLowerCase().indexOf('it') === 0) {
+          voceItaliana = voci[i];
+          break;
+        }
+      }
+      vocePronta = true;
+    };
+    scegli();
+    // Su Chrome l'elenco delle voci arriva in ritardo: senza questo si parla in inglese.
+    window.speechSynthesis.onvoiceschanged = scegli;
+  }
+
+  function pronuncia(frase, urgente) {
+    if (!stato.voceAttiva || !('speechSynthesis' in window) || !frase) { return; }
+    if (urgente) { window.speechSynthesis.cancel(); }
+    var u = new window.SpeechSynthesisUtterance(frase);
+    u.lang = 'it-IT';
+    if (voceItaliana) { u.voice = voceItaliana; }
+    u.rate = 1.15;   // Marco ascolta molto piu' veloce; per chi guarda resta comprensibile
+    window.speechSynthesis.speak(u);
+  }
+
+  function zittisci() {
+    if ('speechSynthesis' in window) { window.speechSynthesis.cancel(); }
+  }
+
+  function annuncia(frase, origine) {
+    scrivi(regioneCalma, frase, origine);
+    pronuncia(frase, false);
+  }
+
+  function allarme(frase, origine) {
+    scrivi(regioneUrgente, frase, origine);
+    pronuncia(frase, true);
+  }
 
   function allarmeUnaVolta(frase, origine) {
     var adesso = Date.now();
