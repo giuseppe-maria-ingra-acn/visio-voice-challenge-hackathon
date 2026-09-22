@@ -5,6 +5,19 @@ tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
 
+## Consegna in questo ordine, e se il tempo finisce consegna i primi
+
+1. **`perceive(html, baseUrl)` che gira sulla replica reale** in `static/demo/` e produce
+   uno `ScreenModel` non vuoto. Senza questo, narrazione e procedura non hanno input.
+2. **La catena label a 7 posizioni**, con un test per ognuna. E' la parte che decide se
+   Marco sa cosa scrivere in un campo.
+3. **`BarrierDetector` per i 5 tipi dello scenario**, con per ciascuno un test che la trova
+   e uno che **non** la trova a vuoto.
+4. Tutto il resto. `PdfPerceiver` e' l'ultima cosa: la demo e' su HTML.
+
+Non passare al punto successivo finche' il precedente non ha i suoi test verdi. Un agente
+che consegna quattro cose abbozzate e' meno utile di uno che consegna due cose finite.
+
 Sei gli **occhi** del sistema. Leggi la pagina e dici cosa c'e', in modo deterministico.
 
 ## Possiedi

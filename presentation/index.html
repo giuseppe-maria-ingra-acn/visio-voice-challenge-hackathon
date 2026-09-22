@@ -1,0 +1,647 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>VisioVoice · Hagenthon — Accessibilità Digitale</title>
+<style>
+  :root {
+    --purple: #A100FF;
+    --purple-light: #BE82FF;
+    --purple-dark: #460073;
+    --ink: #0A0014;
+    --rose: #FF50A0;
+    --bg: #050008;
+    --t-1: rgba(255,255,255,0.88);
+    --t-2: rgba(255,255,255,0.65);
+    --t-3: rgba(255,255,255,0.45);
+    --hair: rgba(255,255,255,0.10);
+    --panel: rgba(255,255,255,0.02);
+    --panel-2: rgba(255,255,255,0.035);
+    --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: #fff;
+    font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: 980px; margin: 0 auto; padding: 48px 24px 80px; }
+  a { color: var(--purple-light); text-underline-offset: 3px; }
+  a:focus-visible { outline: 2px solid var(--purple-light); outline-offset: 3px; border-radius: 4px; }
+  .skip { position: absolute; left: -9999px; top: 0; background: #fff; color: #000; padding: 12px 18px; z-index: 99; font-weight: 600; }
+  .skip:focus { left: 0; }
+
+  /* brand ------------------------------------------------------------- */
+  .brand { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-bottom: 40px; }
+  .brand .logo { font-size: 20px; font-weight: 700; letter-spacing: -0.02em; }
+  .brand .logo .mark { color: var(--purple); }
+  .brand .org { text-align: right; font-size: 10px; line-height: 1.4; }
+  .brand .org .a { color: var(--purple-light); text-transform: uppercase; letter-spacing: 0.25em; font-weight: 600; }
+  .brand .org .b { color: var(--t-3); text-transform: uppercase; letter-spacing: 0.2em; }
+
+  /* hero -------------------------------------------------------------- */
+  .hero { text-align: center; margin-bottom: 44px; }
+  .hero .eyebrow {
+    display: inline-block; border: 1px solid rgba(255,255,255,0.15);
+    background: rgba(255,255,255,0.05); border-radius: 999px;
+    padding: 6px 16px; font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.25em; color: var(--t-2);
+  }
+  .hero h1 { font-size: 40px; font-weight: 700; letter-spacing: -0.02em; margin: 20px 0 12px; line-height: 1.15; }
+  .hero h1 .grad {
+    background: linear-gradient(90deg, var(--purple-light), var(--purple));
+    -webkit-background-clip: text; background-clip: text; color: transparent;
+  }
+  .hero p.claim { max-width: 660px; margin: 0 auto; color: var(--t-2); }
+
+  /* toc --------------------------------------------------------------- */
+  nav.toc { border: 1px solid var(--hair); border-radius: 12px; background: var(--panel); padding: 14px 20px; margin-bottom: 44px; }
+  nav.toc ol { list-style: none; display: flex; flex-wrap: wrap; gap: 6px 22px; margin: 0; padding: 0; }
+  nav.toc a { color: var(--t-2); text-decoration: none; font-size: 13px; }
+  nav.toc a:hover { color: #fff; text-decoration: underline; }
+  nav.toc .n { color: var(--purple-light); font-weight: 700; margin-right: 6px; }
+
+  /* sections ---------------------------------------------------------- */
+  .theme { border: 1px solid var(--hair); border-radius: 18px; background: var(--panel); padding: 32px; margin-bottom: 32px; }
+  .theme-head { border-bottom: 1px solid rgba(161,0,255,0.25); padding-bottom: 16px; margin-bottom: 20px; }
+  .theme-num { font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.25em; color: var(--purple-light); }
+  .theme-head h2 { font-size: 27px; font-weight: 700; letter-spacing: -0.02em; margin: 6px 0 0; line-height: 1.2; }
+  .objective { font-size: 17px; color: var(--t-1); }
+  .focus { font-style: italic; color: var(--t-3); font-size: 14px; }
+
+  h3 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--purple-light); margin: 0 0 8px; }
+  h4 { font-size: 12px; text-transform: uppercase; letter-spacing: 0.2em; color: var(--t-3); margin: 26px 0 12px; }
+  h5 { font-size: 14px; font-weight: 600; margin: 6px 0; }
+  p { color: var(--t-2); }
+  .theme > p:last-child { margin-bottom: 0; }
+  strong { color: #fff; }
+
+  .callout { border: 1px solid rgba(161,0,255,0.25); background: rgba(161,0,255,0.06); border-radius: 12px; padding: 18px 20px; margin: 22px 0; }
+  .callout p { margin: 0; color: var(--t-1); }
+  .quote { border: 1px solid rgba(161,0,255,0.25); background: rgba(161,0,255,0.06); border-radius: 12px; padding: 20px 24px; margin: 22px 0; }
+  .quote p { margin: 0; font-size: 18px; color: #fff; }
+  .warn { border: 1px solid rgba(255,80,160,0.2); background: rgba(255,80,160,0.05); border-radius: 12px; padding: 18px 20px; margin-top: 24px; }
+  .warn h4 { color: rgba(255,80,160,0.9); margin-top: 0; }
+  .warn p { margin: 0; }
+
+  .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; }
+  .cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+  .cards.two { grid-template-columns: 1fr 1fr; }
+  .card { border: 1px solid var(--hair); background: var(--panel-2); border-radius: 12px; padding: 16px 18px; }
+  .card .d-num { font-size: 13px; font-weight: 700; color: var(--purple-light); }
+  .card p { font-size: 13.5px; color: var(--t-2); margin: 0; }
+  .card.hl { border-color: rgba(161,0,255,0.35); background: rgba(161,0,255,0.05); }
+
+  .bullets { list-style: none; padding: 0; margin: 0; }
+  .bullets li { position: relative; padding-left: 20px; color: var(--t-2); margin-bottom: 8px; }
+  .bullets li::before { content: "\203A"; position: absolute; left: 0; color: var(--purple); font-weight: 700; }
+  .avoid-list li::before { content: "\00D7"; color: var(--rose); }
+
+  /* stat tiles -------------------------------------------------------- */
+  .tiles { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; margin: 4px 0 8px; }
+  .tile { border: 1px solid var(--hair); background: var(--panel-2); border-radius: 12px; padding: 16px 18px; }
+  .tile .num { display: block; font-size: 30px; font-weight: 700; letter-spacing: -0.03em; line-height: 1.1; }
+  .tile .lab { display: block; font-size: 11.5px; text-transform: uppercase; letter-spacing: 0.12em; color: var(--t-3); margin-top: 6px; }
+
+  /* before / after ---------------------------------------------------- */
+  table { width: 100%; border-collapse: collapse; font-size: 14px; }
+  caption { text-align: left; color: var(--t-3); font-size: 12.5px; padding-bottom: 10px; font-style: italic; }
+  th, td { text-align: left; padding: 11px 12px; border-bottom: 1px solid var(--hair); vertical-align: top; color: var(--t-2); }
+  thead th { font-size: 11px; text-transform: uppercase; letter-spacing: 0.18em; color: var(--t-3); font-weight: 600; }
+  tbody th { color: #fff; font-weight: 600; }
+  tr:last-child td, tr:last-child th { border-bottom: none; }
+  code, .mono { font-family: var(--mono); font-size: 12.5px; }
+  code { color: var(--purple-light); }
+  .hears { font-family: var(--mono); font-size: 12.5px; color: var(--rose); }
+  .says b { color: var(--purple-light); font-weight: 600; }
+  .yes { color: var(--rose); font-weight: 600; }
+  .no { color: var(--purple-light); font-weight: 600; }
+  .small { display: block; font-size: 12px; color: var(--t-3); font-weight: 400; }
+
+  pre.diagram {
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.55; color: var(--t-2);
+    border: 1px solid var(--hair); background: rgba(0,0,0,0.35); border-radius: 12px;
+    padding: 20px; overflow-x: auto; margin: 0;
+  }
+
+  /* steps ------------------------------------------------------------- */
+  ol.steps { counter-reset: s; list-style: none; padding: 0; margin: 0; }
+  ol.steps li { counter-increment: s; position: relative; padding-left: 40px; margin-bottom: 14px; color: var(--t-2); }
+  ol.steps li::before {
+    content: counter(s); position: absolute; left: 0; top: 0;
+    width: 26px; height: 26px; border-radius: 50%; text-align: center; line-height: 26px;
+    font-size: 12px; font-weight: 700; color: #fff;
+    border: 1px solid rgba(161,0,255,0.5); background: rgba(161,0,255,0.15);
+  }
+
+  footer { text-align: center; margin-top: 40px; font-size: 11px; text-transform: uppercase; letter-spacing: 0.2em; color: rgba(255,255,255,0.28); }
+  footer .mark { color: var(--purple); }
+  footer p { color: inherit; }
+
+  @media (max-width: 720px) {
+    .cols, .cards, .cards.two { grid-template-columns: 1fr; }
+    .tiles { grid-template-columns: 1fr 1fr; }
+    .hero h1 { font-size: 30px; }
+    .theme { padding: 22px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  @media print {
+    body { background: #fff; color: #111; }
+    .theme { break-inside: avoid; border-color: #ddd; background: #fff; }
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#contenuto">Salta al contenuto</a>
+<div class="wrap">
+
+  <div class="brand">
+    <span class="logo">VisioVoice<span class="mark">&gt;</span></span>
+    <span class="org">
+      <span class="a">Accenture</span><br />
+      <span class="b">Application Engineering</span>
+    </span>
+  </div>
+
+  <div class="hero">
+    <span class="eyebrow">Tema 01 &middot; Accessibilit&agrave; Digitale</span>
+    <h1>Una schermata che <span class="grad">si racconta</span><br />a chi non pu&ograve; vederla</h1>
+    <p class="claim">
+      Un livello accessibile che entra <strong>dentro</strong> la pagina di un servizio online: spiega a voce
+      cosa c&#39;&egrave; anche quando l&#39;informazione &egrave; chiusa in un&#39;immagine, aziona i controlli della
+      pagina da tastiera e accompagna passo per passo fino all&#39;invio. Ogni frase che l&#39;utente ascolta
+      dichiara <strong>da dove viene</strong>.
+    </p>
+  </div>
+
+  <nav class="toc" aria-label="Indice della presentazione">
+    <ol>
+      <li><a href="#s1"><span class="n">01</span>Persona e barriera</a></li>
+      <li><a href="#s2"><span class="n">02</span>Prima e dopo</a></li>
+      <li><a href="#s3"><span class="n">03</span>L&#39;invariante di provenance</a></li>
+      <li><a href="#s4"><span class="n">04</span>Il framework agentico</a></li>
+      <li><a href="#s5"><span class="n">05</span>Architettura</a></li>
+      <li><a href="#s6"><span class="n">06</span>Oltre un singolo servizio</a></li>
+      <li><a href="#s7"><span class="n">07</span>Numeri e limiti</a></li>
+    </ol>
+  </nav>
+
+  <main id="contenuto">
+
+  <!-- 01 ------------------------------------------------------------- -->
+  <article class="theme" id="s1">
+    <header class="theme-head">
+      <span class="theme-num">01 &middot; Persona e barriera</span>
+      <h2>Il problema non &egrave; leggere lo schermo. &Egrave; il punto in cui lo screen reader si ferma.</h2>
+    </header>
+
+    <p class="objective">Gli screen reader esistono, sono maturi e funzionano bene. Il punto cieco &egrave; un
+    altro: quando l&#39;informazione che serve <strong>non &egrave; nel testo</strong>, ma dentro un&#39;immagine,
+    un grafico, un calendario visuale o un errore segnalato solo col colore.</p>
+    <p class="focus">Non abbiamo progettato per &ldquo;gli utenti ipovedenti&rdquo;. Abbiamo progettato per una
+    persona, con un obiettivo e un punto preciso in cui si blocca.</p>
+
+    <div class="cols">
+      <div>
+        <h4>Chi &egrave;</h4>
+        <p><strong>Marco Ferrari, 41 anni, cieco dalla nascita.</strong> NVDA in italiano a 380 parole al
+        minuto, display braille a 40 celle, <strong>solo tastiera</strong>. Competenza informatica alta:
+        naviga per landmark, salta di campo in campo.</p>
+        <div class="callout">
+          <p>Non &egrave; un utente confuso: &egrave; un utente <strong>bloccato</strong>. Non serve
+          semplificargli i concetti, serve dargli accesso all&#39;informazione che la pagina nasconde.</p>
+        </div>
+      </div>
+      <div>
+        <h4>Dove si ferma</h4>
+        <p>Deve capire quanto gli spetta. La tabella degli importi &egrave; un PNG. Ecco tutto quello che il
+        suo screen reader gli dice, davanti al dato su cui deve prendere una decisione economica:</p>
+        <pre class="diagram" aria-label="Cosa pronuncia lo screen reader">grafico    immagine    tabella importi</pre>
+        <p style="margin-bottom:0">N&eacute; tabella HTML, n&eacute; PDF accessibile, n&eacute; testo: per sapere
+        la cifra <strong>deve chiedere a una persona che vede</strong>. &Egrave; esattamente la dipendenza che
+        vogliamo togliere.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 02 ------------------------------------------------------------- -->
+  <article class="theme" id="s2">
+    <header class="theme-head">
+      <span class="theme-num">02 &middot; Percorso assistito</span>
+      <h2>Prima e dopo, sulla stessa pagina</h2>
+    </header>
+
+    <p class="objective">Quattro barriere, tutte frequentissime nei servizi digitali: un dato chiuso in
+    un&#39;immagine, un campo senza etichetta, uno stato disegnato e non scritto, un errore comunicato solo
+    col colore.</p>
+
+    <table>
+      <caption>Le frasi della colonna &ldquo;dopo&rdquo; sono quelle che l&#39;utente sente davvero nella demo.</caption>
+      <thead>
+        <tr><th scope="col">Barriera</th><th scope="col">Prima &mdash; cosa sente</th><th scope="col">Dopo &mdash; cosa dice VisioVoice</th></tr>
+      </thead>
+      <tbody>
+        <tr>
+          <th scope="row">Tabella importi in un PNG<span class="small">dato chiuso in un&#39;immagine</span></th>
+          <td class="hears">&laquo; immagine &raquo;</td>
+          <td class="says">&laquo; Con il tuo ISEE ricadi nella <b>terza fascia</b>: <b>149 euro al mese</b> per
+            figlio. Vuoi sentire tutte le fasce? &raquo; &mdash; e l&#39;immagine diventa una
+            <b>tabella vera</b>, navigabile per righe e colonne.</td>
+        </tr>
+        <tr>
+          <th scope="row">Campo IBAN senza <code>label</code><span class="small">campo non etichettato</span></th>
+          <td class="hears">&laquo; modifica, vuoto &raquo;</td>
+          <td class="says">&laquo; IBAN del conto su cui ricevere il pagamento. <b>27 caratteri</b>, comincia
+            con IT. Esempio: IT60 X054&hellip; &raquo;</td>
+        </tr>
+        <tr>
+          <th scope="row">IBAN sbagliato<span class="small">errore segnalato solo col colore</span></th>
+          <td class="hears">silenzio &rarr; poi l&#39;invio viene rifiutato</td>
+          <td class="says">&laquo; Questo IBAN non supera il controllo di validit&agrave;: probabilmente c&#39;&egrave;
+            una cifra sbagliata. &raquo; <b>Subito, non dopo l&#39;invio.</b></td>
+        </tr>
+        <tr>
+          <th scope="row">Avanzamento disegnato<span class="small">stato solo visuale</span></th>
+          <td class="hears">&laquo; immagine &raquo;</td>
+          <td class="says">&laquo; <b>Passo 2 di 5</b>: dati dei figli. Restano tre passi. &raquo;</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <h4>Tre scelte di prodotto dietro quella tabella</h4>
+    <div class="cards">
+      <div class="card">
+        <h5>Ripara la pagina dall&#39;interno</h5>
+        <p>Non &egrave; una seconda applicazione in cui ridigitare tutto. L&#39;utente compila
+        <strong>il form del sito</strong>: la pagina resta la fonte di verit&agrave;, VisioVoice assiste.</p>
+      </div>
+      <div class="card">
+        <h5>Il protocollo &egrave; quello vero</h5>
+        <p>Il numero che sente alla fine &egrave; la risposta del servizio al suo invio, non un dato generato
+        da noi. Nessun intermediario che possa sbagliare a ritrasmettere.</p>
+      </div>
+      <div class="card">
+        <h5>Nessuna integrazione con lo screen reader</h5>
+        <p>NVDA legge l&#39;albero di accessibilit&agrave; del browser. Una <code>&lt;table&gt;</code> vera, una
+        <code>&lt;label for&gt;</code> e una regione <code>aria-live</code> <strong>sono</strong>
+        l&#39;integrazione &mdash; e valgono anche per JAWS e VoiceOver.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 03 ------------------------------------------------------------- -->
+  <article class="theme" id="s3">
+    <header class="theme-head">
+      <span class="theme-num">03 &middot; Semplificare senza tradire</span>
+      <h2>Ogni frase dice da dove viene. E i numeri li ricontrolliamo uno per uno.</h2>
+    </header>
+
+    <p class="objective">Marco <strong>non pu&ograve; verificare</strong> quello che gli diciamo: non vede
+    lo schermo. Se noi sbagliamo un importo, lui prende una decisione economica sbagliata e non ha
+    nessun modo di accorgersene. Un&#39;AI che riformula un dato per una persona in queste condizioni
+    ha bisogno di una regola sopra tutto il resto.</p>
+
+    <div class="quote">
+      <p>Ogni frase che l&#39;utente ascolta dichiara <strong>da dove viene</strong>. E ogni numero
+      pronunciato deve essere <strong>ritrovabile nella fonte</strong>.</p>
+    </div>
+
+    <h4>Come funziona, su una frase vera</h4>
+    <ol class="steps">
+      <li>La fonte &mdash; la pagina del servizio &mdash; dice: <code>149,00 &euro; al mese per figlio</code>.</li>
+      <li>L&#39;AI la riformula per essere ascoltata: &laquo; Con il tuo ISEE ricadi nella terza fascia:
+        <strong>149 euro al mese</strong> per figlio &raquo;.</li>
+      <li>Prima di pronunciarla, un controllo estrae <strong>tutti i numeri della frase</strong> e li
+        ricerca nella fonte. <code>149</code> c&#39;&egrave; &rarr; la frase esce cos&iacute; com&#39;&egrave;.</li>
+      <li>Se l&#39;AI avesse detto <strong>152</strong>, quel numero nella fonte non ci sarebbe. La frase
+        <strong>viene retrocessa</strong> e Marco sente: &laquo; attenzione, questa parte l&#39;ho dedotta
+        io, conviene verificarla &raquo;.</li>
+    </ol>
+
+    <h4>Le quattro etichette che una frase pu&ograve; avere</h4>
+    <table>
+      <caption>Il nome tecnico &egrave; quello che si vede nel codice e nell&#39;API; la colonna di destra &egrave; ci&ograve; che cambia per chi ascolta.</caption>
+      <thead>
+        <tr><th scope="col">Etichetta</th><th scope="col">Vuol dire</th><th scope="col">L&#39;utente sente un&#39;avvertenza?</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Copiata dalla pagina<span class="small mono">SOURCE_VERBATIM</span></th>
+            <td>parola per parola come sta nella fonte</td><td>no</td></tr>
+        <tr><th scope="row">Riformulata e verificata<span class="small mono">AI_REPHRASED</span></th>
+            <td>riscritta dall&#39;AI, ma ogni numero e ogni nome proprio &egrave; stato ritrovato nella fonte</td><td>no</td></tr>
+        <tr><th scope="row">Dedotta<span class="small mono">AI_INFERRED</span></th>
+            <td>l&#39;AI ha messo qualcosa che nella fonte non si ritrova</td><td class="yes">s&iacute;, viene detta a voce</td></tr>
+        <tr><th scope="row">Approvata da una persona<span class="small mono">HUMAN_REVIEWED</span></th>
+            <td>qualcuno l&#39;ha letta e confermata</td><td>no</td></tr>
+      </tbody>
+    </table>
+
+    <h4>Perch&eacute; questo meccanismo regge</h4>
+    <div class="cards">
+      <div class="card hl">
+        <h5>L&#39;AI non si d&agrave; il voto da sola</h5>
+        <p>&ldquo;Riformulata e verificata&rdquo; &egrave; una <strong>candidatura</strong>, non un traguardo:
+        basta <strong>un solo numero</strong> che non si ritrova e la frase scende a &ldquo;dedotta&rdquo;.
+        E se una frase mescola pezzi di origine diversa, vale <strong>il pezzo peggiore</strong>.</p>
+      </div>
+      <div class="card">
+        <h5>Nessuna AI che controlla un&#39;altra AI</h5>
+        <p>Il controllo &egrave; un <strong>algoritmo</strong>: pulisce i numeri da virgole, punti e simboli
+        di valuta, li estrae e li cerca nel testo della fonte. Un modello che ne controlla un altro
+        condivide i suoi punti ciechi.</p>
+      </div>
+      <div class="card">
+        <h5>&Egrave; un test che gira, non una promessa</h5>
+        <p>Il controllo &egrave; una suite automatica (<code>ProvenanceInvariantTest</code>) e un hook
+        avvisa se qualcuno scrive testo per l&#39;utente senza dichiararne l&#39;origine. Nel codice non
+        esiste una frase priva di quel campo: il tipo stesso non lo permette.</p>
+      </div>
+    </div>
+
+    <div class="callout">
+      <p><strong>Perch&eacute; conta:</strong> rende <em>verificabili da una macchina</em> due requisiti della
+      challenge che altrimenti restano slogan &mdash; &ldquo;semplificare senza tradire&rdquo; e
+      &ldquo;indicare dove ha contribuito l&#39;AI&rdquo;.</p>
+    </div>
+  </article>
+
+  <!-- 05 ------------------------------------------------------------- -->
+  <article class="theme" id="s4">
+    <header class="theme-head">
+      <span class="theme-num">04 &middot; Agentic coding</span>
+      <h2>Il framework agentico: una squadra, non un prompt</h2>
+    </header>
+
+    <p class="objective">Il codice non &egrave; stato chiesto a un unico modello generico. &Egrave; stato
+    costruito da <strong>otto agenti specializzati</strong>, ognuno con un perimetro di file suo e una
+    definizione di &ldquo;fatto&rdquo; verificabile a macchina.</p>
+
+    <div class="tiles">
+      <div class="tile"><span class="num">8</span><span class="lab">agenti</span></div>
+      <div class="tile"><span class="num">5</span><span class="lab">skill di fase</span></div>
+      <div class="tile"><span class="num">4</span><span class="lab">hook di gate</span></div>
+      <div class="tile"><span class="num">77</span><span class="lab">file Java</span></div>
+      <div class="tile"><span class="num">141</span><span class="lab">test</span></div>
+    </div>
+
+    <h4>I tre principi di disegno</h4>
+    <div class="cards">
+      <div class="card">
+        <h5>Un agente = una responsabilit&agrave; con un proprio &ldquo;fatto&rdquo;</h5>
+        <p>Non un agente per tipo di file. <code>perception-engineer</code> esiste perch&eacute; &ldquo;la pagina
+        &egrave; stata letta correttamente&rdquo; &egrave; una condizione verificabile da sola. Un ipotetico
+        <code>java-writer</code> non saprebbe <strong>quando fermarsi</strong>.</p>
+      </div>
+      <div class="card hl">
+        <h5>Chi costruisce non &egrave; chi verifica</h5>
+        <p><code>fidelity-auditor</code> <strong>non ha</strong> <code>Write</code> n&eacute;
+        <code>Edit</code>. Non &egrave; una limitazione: &egrave; la ragione per cui esiste. Chi trova un
+        problema e lo sistema da solo perde l&#39;incentivo a cercare a fondo.</p>
+      </div>
+      <div class="card">
+        <h5>Perimetri disgiunti, contratti condivisi</h5>
+        <p>Tre agenti scrivono Java <strong>contemporaneamente</strong> senza conflitti perch&eacute;
+        possiedono package diversi e dipendono dagli stessi tipi. Il prezzo &egrave; che i contratti si
+        scrivono prima, da un agente solo.</p>
+      </div>
+    </div>
+
+    <h4>L&#39;ordine di lancio</h4>
+    <pre class="diagram" aria-label="Diagramma dell'ordine di lancio degli agenti">
+              scenario-researcher          fase 0 - da solo: lo scenario reale con le sue prove
+                       |
+               contract-architect          fase 1 - DA SOLO: il vocabolario condiviso
+                       |
+   +-------------+-----+-----+-------------+
+   |             |           |             |
+perception   narration   procedure   a11y-frontend    fase 2/3 - IN PARALLELO
+   |             |           |             |
+   +-------------+-----+-----+-------------+
+                       |
+                fidelity-auditor           fase 4 - sola lettura, dopo ogni build
+                       |
+                 demo-director             fase 5 - l'ultima ora
+</pre>
+    <h4>I gate meccanici: gli invarianti non dipendono dalla memoria di nessuno</h4>
+    <table>
+      <caption>Hook configurati in <code>.claude/settings.json</code> ed eseguiti dall&#39;ambiente, non dal modello.</caption>
+      <thead>
+        <tr><th scope="col">Hook</th><th scope="col">Quando</th><th scope="col">Cosa impone</th><th scope="col">Se fallisce</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>session-context</code></th><td>avvio sessione</td><td>inietta la persona e lo stato reale letto dal filesystem</td><td>&mdash;</td></tr>
+        <tr><th scope="row"><code>invariant-guard</code></th><td>ogni scrittura</td><td>nessun dato di dominio dentro il codice di produzione</td><td><strong>blocca</strong></td></tr>
+        <tr><th scope="row"><code>invariant-guard</code></th><td>ogni scrittura</td><td>nessun testo utente senza provenance</td><td>avvisa</td></tr>
+        <tr><th scope="row"><code>java-build-gate</code></th><td>ogni file <code>.java</code></td><td><code>mvn compile</code>: il codice deve compilare</td><td><strong>risveglia l&#39;agente</strong> con l&#39;errore</td></tr>
+        <tr><th scope="row"><code>agent-activity</code></th><td>fine agente</td><td>registra chi ha finito, per la tracciabilit&agrave;</td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+    <div class="callout">
+      <p>Una scelta che sembra incoerente e non lo &egrave;: l&#39;hook <strong>blocca</strong> sui dati di
+      dominio (un importo scritto nel codice &egrave; <em>sempre</em> un errore) ma solo
+      <strong>avvisa</strong> sulla provenance, che &egrave; un controllo euristico. Un blocco su
+      un&#39;euristica diventa in fretta un hook che qualcuno disattiva &mdash; e allora non protegge
+      pi&ugrave; niente.</p>
+    </div>
+
+    <h4>Cosa resta in mano alle persone</h4>
+    <ul class="bullets">
+      <li>Lanciare le skill di fase nell&#39;ordine.</li>
+      <li><strong>Verificare i criteri di uscita di persona:</strong> <code>mvn -q test</code>, non &ldquo;l&#39;agente ha detto che &egrave; fatto&rdquo;.</li>
+      <li>Colmare i buchi nei contratti: se due builder chiedono lo stesso campo mancante, lo si aggiunge <em>una volta, per tutti</em>.</li>
+      <li>Assegnare le correzioni dell&#39;audit al proprietario del perimetro giusto.</li>
+      <li>Fare le verifiche che nessun agente pu&ograve; fare: percorrere la demo col mouse scollegato, ritrovare a mano i numeri nella fonte, leggere le frasi ad alta voce.</li>
+    </ul>
+    <p class="focus">Un agente che dichiara &ldquo;fatto&rdquo; sta riferendo la propria impressione;
+    <code>mvn -q test</code> riferisce un fatto.</p>
+  </article>
+
+  <!-- 06 ------------------------------------------------------------- -->
+  <article class="theme" id="s5">
+    <header class="theme-head">
+      <span class="theme-num">05 &middot; Architettura</span>
+      <h2>Livello sottile nella pagina, cervello nel backend</h2>
+    </header>
+
+    <p class="objective">Il livello nel browser fa tre cose e nient&#39;altro: <strong>legge</strong> il DOM,
+    <strong>chiama</strong> il backend, <strong>inietta</strong> il risultato. Nessuna logica di dominio in
+    JavaScript.</p>
+
+    <pre class="diagram" aria-label="Diagramma dell'architettura">
+utente  ->  pagina del servizio  +  livello VisioVoice
+                                          |  HTTP  localhost:8080
+                                          v
+                        backend Java: percezione, narrazione,
+                        gate di fidelity, validatori, provenance
+                                          |
+                                          v
+                           DOM accessibile iniettato nella pagina
+                                          |
+                                          v
+               NVDA / JAWS / VoiceOver lo leggono dall'albero di accessibilita'
+</pre>
+
+    <div class="cols" style="margin-top:24px">
+      <div>
+        <h4>Due canali, due domande</h4>
+        <pre class="diagram">DOM -> ScreenModel -> SpokenScript -> gate -> DOM accessibile
+            |
+            +-> ProcedurePlan -> coaching campo per campo</pre>
+        <p style="margin-bottom:0">Uno <strong>racconta</strong> cosa c&#39;&egrave;, l&#39;altro
+        <strong>accompagna</strong> nella procedura: &ldquo;cosa c&#39;&egrave; qui?&rdquo; e &ldquo;cosa devo
+        fare adesso?&rdquo; arrivano in momenti diversi.</p>
+      </div>
+      <div>
+        <h4>Se il backend non risponde</h4>
+        <p>All&#39;avvio il livello fa <strong>prima</strong> le riparazioni che non hanno bisogno della rete:
+        etichette sui campi, stato di avanzamento, calendario da tastiera, annuncio degli errori.
+        Se il backend tace, la pagina resta comunque pi&ugrave; accessibile di come l&#39;abbiamo trovata.</p>
+        <p style="margin-bottom:0"><strong>Il mock &egrave; il default, non un ripiego.</strong>
+        <code>MockLlmClient</code> &egrave; il bean primario e gira su fixture registrate; il client reale si
+        attiva solo con una variabile d&#39;ambiente.</p>
+      </div>
+    </div>
+
+    <h4>Dove l&#39;AI lavora, e dove non deve lavorare</h4>
+    <table>
+      <caption>La colonna &ldquo;senza LLM&rdquo; &egrave; la parte del sistema di cui possiamo <strong>dimostrare</strong> la correttezza. Tenerla ampia &egrave; una scelta di disegno.</caption>
+      <thead>
+        <tr><th scope="col">Strato</th><th scope="col">Cosa fa</th><th scope="col">LLM</th><th scope="col">Perch&eacute;</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row"><code>perception</code></th><td>HTML &rarr; <code>ScreenModel</code>, rileva le barriere</td><td class="no">no</td><td>deterministico con jsoup: non pu&ograve; allucinare un campo che non c&#39;&egrave;</td></tr>
+        <tr><th scope="row"><code>narration</code></th><td><code>ScreenModel</code> &rarr; copione parlato</td><td class="yes">s&iacute;</td><td>descrivere un&#39;immagine richiede un modello</td></tr>
+        <tr><th scope="row"><code>narration</code> (gate)</th><td>riancora ogni numero alla fonte</td><td class="no">no</td><td>un LLM che verifica un LLM condivide i suoi punti ciechi</td></tr>
+        <tr><th scope="row"><code>validation</code></th><td>codice fiscale, IBAN, date</td><td class="no">no</td><td>algoritmi normati, con vettori di test noti</td></tr>
+        <tr><th scope="row"><code>orchestrator</code></th><td>sequenza, stato immutabile, trace</td><td class="no">no</td><td>&mdash;</td></tr>
+      </tbody>
+    </table>
+  </article>
+
+  <!-- 07 ------------------------------------------------------------- -->
+  <article class="theme" id="s6">
+    <header class="theme-head">
+      <span class="theme-num">06 &middot; Scalabilit&agrave;</span>
+      <h2>Oltre un singolo servizio: cosa rende VisioVoice generale</h2>
+    </header>
+
+    <p class="objective">La domanda di Assegno Unico sul portale INPS &egrave; il <strong>caso di esempio</strong>
+    con cui abbiamo costruito e verificato il sistema. Non &egrave; il perimetro del prodotto: nel codice non
+    c&#39;&egrave; una riga che sappia di INPS.</p>
+
+    <div class="cards two">
+      <div class="card hl">
+        <h5>Lo scenario &egrave; un file di dati, non codice</h5>
+        <p>Barriere, fonti citabili e passi della procedura stanno in un JSON sotto
+        <code>resources/scenarios/</code>. Un hook <strong>blocca</strong> la scrittura di importi, scadenze o
+        requisiti dentro il codice di produzione. Cambiare servizio significa aggiungere un file, non rifare
+        il motore.</p>
+      </div>
+      <div class="card">
+        <h5>Le barriere sono tipi, non casi particolari</h5>
+        <p><code>IMAGE_ONLY_DATA</code>, <code>UNLABELED_INPUT</code>, <code>VISUAL_ONLY_STATE</code>,
+        <code>ERROR_NOT_ANNOUNCED</code>, <code>KEYBOARD_INACCESSIBLE</code>, <code>MISSING_STRUCTURE</code>,
+        <code>ILLOGICAL_ORDER</code>: i criteri WCAG pi&ugrave; violati. Qualunque servizio online li rompe
+        allo stesso modo.</p>
+      </div>
+    </div>
+
+    <h4>Lo stesso motore, altri contesti</h4>
+    <table>
+      <caption>Nessuno di questi richiede una modifica al motore: richiede uno scenario e, dove serve, un validatore in pi&ugrave;.</caption>
+      <thead>
+        <tr><th scope="col">Contesto</th><th scope="col">La barriera tipica</th><th scope="col">Cosa cambia</th></tr>
+      </thead>
+      <tbody>
+        <tr><th scope="row">Servizi pubblici<span class="small">fisco, comune, sanit&agrave;, scuola</span></th><td>tariffe, soglie e scadenze pubblicate come immagine o PDF non accessibile</td><td>uno scenario</td></tr>
+        <tr><th scope="row">Home banking e assicurazioni</th><td>grafici di rendimento solo visuali, errori di validazione segnalati col colore</td><td>scenario + validatori di dominio</td></tr>
+        <tr><th scope="row">Utility e telco</th><td>consumi della bolletta in un grafico, confronto fra offerte in una tabella-immagine</td><td>uno scenario</td></tr>
+        <tr><th scope="row">Applicativi aziendali interni</th><td>cruscotti non etichettati, wizard multi-step con lo stato disegnato</td><td>scenario + l&#39;estensione MV3</td></tr>
+        <tr><th scope="row">E-commerce e prenotazioni</th><td>calendari di disponibilit&agrave; come griglie di pulsanti senza nome</td><td>uno scenario</td></tr>
+      </tbody>
+    </table>
+
+    <div class="cards">
+      <div class="card">
+        <h5>Il framework agentico &egrave; riutilizzabile a sua volta</h5>
+        <p>Perimetri disgiunti, contratti scritti prima, un verificatore in sola lettura, invarianti imposti
+        da hook: questa struttura non parla di accessibilit&agrave;. &Egrave; un modo di far lavorare
+        pi&ugrave; agenti in parallelo su un progetto <strong>qualunque</strong> senza che divergano.</p>
+      </div>
+      <div class="card">
+        <h5>L&#39;invariante vale ovunque serva fiducia</h5>
+        <p>Qualunque prodotto in cui un modello riformula un dato per qualcuno che <strong>non pu&ograve;
+        controllarlo</strong> &mdash; referti, contratti, bollette, atti &mdash; ha lo stesso problema e
+        pu&ograve; usare lo stesso gate deterministico.</p>
+      </div>
+      <div class="card">
+        <h5>Non serve la collaborazione del sito</h5>
+        <p>Nella forma a estensione VisioVoice non chiede niente a chi pubblica la pagina: nessun SDK da
+        integrare, nessun accordo, nessuna attesa che il fornitore sistemi il suo HTML.</p>
+      </div>
+    </div>
+  </article>
+
+  <!-- 08 ------------------------------------------------------------- -->
+  <article class="theme" id="s7">
+    <header class="theme-head">
+      <span class="theme-num">07 &middot; Trasparenza</span>
+      <h2>I numeri, e i limiti che dichiariamo da soli</h2>
+    </header>
+
+    <p class="objective">Un sistema che chiede fiducia deve essere il primo a dire dove non arriva.
+    Queste righe stanno nel repository, non solo in questa pagina.</p>
+
+    <div class="cards two">
+      <div class="card">
+        <h5>Il gate prende i numeri inventati, non le parafrasi sbagliate</h5>
+        <p>Intercetta cifre e nomi propri che non si ritrovano nella fonte. <em>Non</em> intercetta una
+        parafrasi semanticamente errata con i numeri giusti (&ldquo;entro il 30 giugno&rdquo; &rarr;
+        &ldquo;dopo il 30 giugno&rdquo;). Quello resta revisione umana, ed &egrave; tracciato.</p>
+      </div>
+      <div class="card">
+        <h5>La pagina della demo &egrave; una ricostruzione dichiarata</h5>
+        <p>Non abbiamo acceduto a inps.it: nessun login SPID, nessuno scraping. Barriere modellate su pattern
+        WCAG documentati e sui dati del monitoraggio AgID; importi da fonti secondarie che citano una
+        circolare. Cifre <strong>pubblicate</strong>, non <strong>confermate alla fonte</strong> &mdash; ed
+        &egrave; scritto barriera per barriera (<code>OSSERVATO</code> / <code>RICOSTRUITO</code>).</p>
+      </div>
+      <div class="card">
+        <h5>Cosa nessun test pu&ograve; dire</h5>
+        <p>Che il tono sia giusto, che le frasi siano sostenibili a 380 parole al minuto, che il percorso
+        funzioni davvero con NVDA. Sono verifiche umane, e stanno nel piano con un nome accanto.</p>
+      </div>
+      <div class="card">
+        <h5>Stato della suite, senza arrotondamenti</h5>
+        <p><strong>141 test</strong>, di cui <strong>133 verdi</strong> al momento in cui questa pagina
+        &egrave; stata scritta. Gli 8 rossi sono nei validatori e in una configurazione di bean: noti,
+        assegnati, e nessuno di essi tocca l&#39;invariante di provenance.</p>
+      </div>
+    </div>
+
+    <h4>Come si prova in due minuti</h4>
+    <pre class="diagram" aria-label="Comandi per avviare il progetto">mvn -q test             # i gate, invariante di provenance compreso
+mvn spring-boot:run     # poi http://localhost:8080/demo/
+</pre>
+    <p>Serve Java 17 e Maven. <strong>Nessuna chiave API</strong>: il client LLM ha un mock deterministico su
+    fixture ed &egrave; il default. La demo non dipende dalla rete della sala.</p>
+  </article>
+
+  </main>
+
+  <footer>
+    <p>VisioVoice<span class="mark">&gt;</span> &middot; Hagenthon &middot; Tema 01 Accessibilit&agrave; Digitale</p>
+    <p style="text-transform:none; letter-spacing:0; font-size:12px; margin-top:14px; line-height:1.6">
+      Questa pagina segue le stesse regole del prodotto: HTML semantico, nessun framework, navigabile da
+      sola tastiera e leggibile da uno screen reader dall&#39;inizio alla fine.
+    </p>
+  </footer>
+
+</div>
+</body>
+</html>

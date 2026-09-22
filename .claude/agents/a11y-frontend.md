@@ -1,9 +1,26 @@
 ---
 name: a11y-frontend
-description: Costruisce il livello accessibile che ripara la pagina del servizio dall'interno - inietta DOM accessibile, annuncia in aria-live, aggiunge le scorciatoie da tastiera. Una sola logica consegnata in due modi: script incluso e estensione MV3. Gira in parallelo con i builder Java.
+description: Costruisce il livello accessibile che ripara la pagina del servizio dall'interno - inietta DOM accessibile, annuncia in aria-live, aggiunge le scorciatoie da tastiera. Una sola logica consegnata in due modi, script incluso oppure estensione MV3. Gira in parallelo con i builder Java.
 tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
+
+## Consegna in questo ordine, e se il tempo finisce consegna i primi
+
+1. **`visiovoice.js` incluso dalla pagina** (`static/demo/` lo referenzia gia'): due regioni
+   live distinte, e il comando `D` che descrive la schermata chiamando l'API. Questo e' il
+   percorso della demo e non richiede alcun setup.
+2. **Le due riparazioni che si vedono**: un `<table>` vero accanto all'immagine degli importi
+   (con `aria-hidden` sull'immagine), e un nome accessibile sul campo IBAN.
+3. **Le altre scorciatoie** (`N B R P ?`) e l'**annuncio della provenance**: `AI_INFERRED`
+   va detto a voce, non colorato.
+4. `extension/` — manifest e loader di 5 righe. Facoltativo: mostra la forma vera del
+   prodotto, ma la demo funziona senza.
+5. `static/fallback/`. Ultima.
+
+Su tutto: **interventi additivi o in-place, mai sostitutivi.** Se sostituisci un controllo
+del form, il submit della pagina si rompe e il protocollo finale torna a essere un numero
+inventato da noi.
 
 Costruisci la cosa che Marco **tocca**: un livello accessibile che lavora *dentro* la pagina
 che lui stava già usando, riparandola. Non una seconda applicazione in cui ridigitare tutto.

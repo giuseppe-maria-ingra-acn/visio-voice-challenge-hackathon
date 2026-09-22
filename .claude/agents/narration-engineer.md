@@ -5,6 +5,21 @@ tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
 
+## Consegna in questo ordine, e se il tempo finisce consegna i primi
+
+1. **`narrate()` sulla replica reale**, panoramica di **massimo 3 frasi**, con `Provenance`
+   su ogni segmento. Un test conta le frasi.
+2. **`describeVisual()` che legge la fixture** `fixtures/descrivi-tabella-importi.json` e
+   restituisce un `AccessibleTable`. **E' il momento centrale della demo**: la tabella
+   dentro l'immagine che diventa dati.
+3. **`FidelityAgent.verify()`** che usa `model.ProvenanceGate` — non reimplementarlo — e
+   restituisce il `FidelityVerdict`, il cui `script()` contiene i segmenti gia' retrocessi.
+4. Livelli di dettaglio ulteriori, descrizione degli altri asset.
+
+Il punto 3 non ammette una seconda implementazione del gate: tre implementazioni
+indipendenti darebbero tre soglie diverse di onesta', ed e' il motivo per cui la regola
+sta nel modello e non qui.
+
 Sei la **voce**. Trasformi un modello di schermata in qualcosa che una persona vuole
 ascoltare — e che puo' fidarsi di ascoltare.
 

@@ -3,18 +3,59 @@
 **Racconta a parole cosa c'è su una schermata, e accompagna passo per passo chi non può
 vederla fino in fondo a una procedura online.**
 
-Non è un lettore di schermo: quello esiste già e funziona bene. VisioVoice affronta il punto
-in cui uno screen reader si ferma — quando l'informazione che serve **non è nel testo**, ma
-dentro un'immagine, un grafico, un calendario visuale o un errore segnalato solo col colore.
+---
+
+## Cos'è
+
+VisioVoice è un **livello accessibile che entra dentro la pagina di un servizio online** e la
+ripara mentre la persona la sta usando: trasforma in informazione ascoltabile ciò che la pagina
+mostra soltanto a chi vede, e accompagna campo per campo fino all'invio.
+
+Non è un lettore di schermo: quello esiste già e funziona bene. VisioVoice affronta **il punto
+in cui uno screen reader si ferma** — quando l'informazione che serve *non è nel testo*, ma
+dentro un'immagine, un grafico, un calendario visuale, o un errore segnalato solo col colore.
+
+Vale per qualunque servizio digitale che presenti queste barriere. Non c'è nulla, nel codice,
+che sappia di un particolare ente o di un particolare form: il servizio da coprire si descrive
+in un **file di dati**, e il motore resta lo stesso.
+
+### Le barriere che affronta
+
+Sono **tipi**, non casi particolari: qualunque sito le rompe allo stesso modo, e corrispondono
+ai criteri WCAG più violati.
+
+| Tipo | Cosa significa | Dove si incontra |
+|---|---|---|
+| `IMAGE_ONLY_DATA` | il dato esiste solo dentro un'immagine o un PDF non accessibile | tariffe, soglie, importi, consumi, grafici di rendimento |
+| `UNLABELED_INPUT` | un campo senza etichetta: lo screen reader dice solo *"modifica, vuoto"* | form, wizard, checkout |
+| `VISUAL_ONLY_STATE` | lo stato è disegnato e non scritto | step-indicator, badge, semafori di stato |
+| `ERROR_NOT_ANNOUNCED` | l'errore è comunicato solo col colore o solo visivamente | validazione dei form |
+| `KEYBOARD_INACCESSIBLE` | si può fare solo col mouse | calendari, drag &amp; drop, mappe |
+| `MISSING_STRUCTURE` | nessun titolo, nessun landmark: la pagina è un muro di testo | pagine informative |
+| `ILLOGICAL_ORDER` | l'ordine di lettura non è l'ordine visivo | layout a colonne |
+
+### Dove si applica
+
+| Contesto | La barriera tipica | Cosa serve aggiungere |
+|---|---|---|
+| Servizi pubblici (previdenza, fisco, comune, sanità, scuola) | importi e scadenze pubblicati come immagine | uno scenario |
+| Home banking, assicurazioni | grafici solo visuali, errori segnalati col colore | scenario + validatori di dominio |
+| Utility e telco | consumi in un grafico, offerte in una tabella-immagine | uno scenario |
+| Applicativi aziendali interni | cruscotti non etichettati, wizard multi-step | scenario + l'estensione MV3 |
+| E-commerce e prenotazioni | calendari come griglie di pulsanti senza nome | uno scenario |
 
 ---
 
-## Il problema, in concreto
+## Il caso su cui l'abbiamo costruito e verificato
+
+Un prodotto di accessibilità che non nasce da una persona precisa diventa una lista di buone
+intenzioni. Il nostro caso di esempio è **la domanda di Assegno Unico sul portale INPS**, ed è
+lo scenario che gira nella demo.
 
 Marco ha 41 anni, è cieco dalla nascita, usa NVDA e un display braille. Deve presentare la
-domanda di Assegno Unico per i suoi due figli.
+domanda per i suoi due figli.
 
-Sulla pagina INPS gli importi mensili per fascia ISEE sono pubblicati come **immagine**.
+Sulla pagina gli importi mensili per fascia ISEE sono pubblicati come **immagine**.
 Ecco tutto quello che il suo screen reader gli dice:
 
 ```
@@ -27,9 +68,10 @@ un'immagine, un calendario che è una griglia di pulsanti senza nome, e un error
 validazione segnalato **solo** colorando il bordo di rosso: invia, viene rifiutato, e non
 sente nulla che gli spieghi perché.
 
-Scheda completa: [docs/PERSONA.md](docs/PERSONA.md)
+Scheda completa: [docs/PERSONA.md](docs/PERSONA.md) — prove e limiti dichiarati:
+[docs/EVIDENCE.md](docs/EVIDENCE.md)
 
-## Cosa fa VisioVoice
+## Cosa cambia, in concreto
 
 | | Prima | Dopo |
 |---|---|---|
@@ -42,8 +84,8 @@ E, su richiesta, dice sempre **da dove viene** quello che ha appena detto.
 
 ## L'idea portante: ogni frase dichiara la sua origine
 
-Marco non può controllare quello che gli diciamo. Se sbagliamo un importo, lui prende una
-decisione economica sbagliata e **non ha modo di accorgersene**.
+Chi non vede lo schermo **non può controllare** quello che gli diciamo. Se sbagliamo un
+importo, prende una decisione economica sbagliata e **non ha modo di accorgersene**.
 
 Per questo ogni frase pronunciata porta con sé un livello di provenienza, e ogni numero
 detto a voce deve essere **ritrovabile nella fonte**. Il controllo è deterministico — nessun
@@ -63,14 +105,18 @@ l'utente lo sente. Specifica e casi di test: [docs/PROVENANCE-SPEC.md](docs/PROV
 una parafrasi semanticamente sbagliata con i numeri giusti ("entro il 30 giugno" → "dopo il
 30 giugno"). Quello resta revisione umana, ed è tracciato in `docs/AI-CONTRIBUTION.md`.
 
+Questa regola non riguarda solo l'accessibilità: vale in qualunque prodotto dove un modello
+riformula un dato per qualcuno che non è in grado di verificarlo — referti, contratti,
+bollette, atti.
+
 ## Che forma ha
 
 Un livello accessibile che **ripara la pagina dall'interno**, invece di essere una seconda
-applicazione in cui ridigitare tutto. Marco compila il form del sito; il protocollo che sente
-alla fine è la risposta del sito al suo invio, non un numero generato da noi.
+applicazione in cui ridigitare tutto. L'utente compila il form del sito; il protocollo che
+sente alla fine è la risposta del sito al suo invio, non un numero generato da noi.
 
 ```
-Marco  ->  pagina del servizio  +  livello VisioVoice
+utente ->  pagina del servizio  +  livello VisioVoice
                                         |  HTTP localhost:8080
                                         v
                        backend Java: percezione, narrazione,
@@ -103,6 +149,7 @@ possono finire dentro il codice**.
 .claude/skills/     i workflow di fase, invocabili come /comando
 .claude/hooks/      i gate meccanici
 docs/               persona, architettura, specifica provenance, piano
+presentation/       la pagina di presentazione e lo speech per la challenge
 ```
 
 Mappa della squadra e ordine di lancio: [docs/AGENT-TEAM.md](docs/AGENT-TEAM.md)
@@ -122,6 +169,15 @@ mvn spring-boot:run     # poi http://localhost:8080/demo/
 
 Strategia di test completa, e cosa non e' automatizzabile:
 [docs/COME-TESTARE.md](docs/COME-TESTARE.md)
+
+## Presentazione
+
+La pagina che racconta prodotto e framework agentico, e il copione da leggere:
+
+```
+presentation/index.html          apri nel browser
+presentation/SPEECH-5-MINUTI.md  5 minuti, con le pause e le domande probabili
+```
 
 ## Stack
 

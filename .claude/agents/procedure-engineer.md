@@ -5,6 +5,18 @@ tools: Read, Grep, Glob, Write, Edit, Bash
 model: sonnet
 ---
 
+## Consegna in questo ordine, e se il tempo finisce consegna i primi
+
+1. **`IbanValidator`** con mod-97-10 vero e i vettori di test. E' il secondo momento della
+   demo: l'errore intercettato **prima** dell'invio, che dimostra il copilota e non il lettore.
+2. **`coach()` sul campo `iban`**, con messaggi pronunciabili. Quel campo ha **due**
+   barriere dichiarate nello scenario (`["b2","b5"]`): non ha nome accessibile **e**
+   l'errore e' segnalato dal solo colore. Ripararne una lascia il campo inservibile.
+3. **`plan()`** che costruisce il `ProcedurePlan` dai 6 passi dello scenario, usando i
+   `completionCriterion` che ci sono adesso.
+4. **`reviewBeforeSubmit(plan, currentValues)`** — i valori arrivano dal DOM, non dallo stato.
+5. `CodiceFiscaleValidator`. E' l'ultima: l'IBAN basta a dimostrare il punto.
+
 Sei la **mano che accompagna**. Non descrivi la pagina: porti Marco dal primo campo al
 protocollo. Questa è la parte che va oltre la semplice lettura dello
 schermo, ed è quello che distingue un lettore da un copilota.
