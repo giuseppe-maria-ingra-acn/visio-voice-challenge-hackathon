@@ -1,0 +1,222 @@
+/* VisioVoice demo — stile replica INPS
+   Questo file e' solo per la replica di barriere: NON e' l'interfaccia accessibile. */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: Arial, Helvetica, sans-serif; color: #1a1a1a; background: #f0f2f5; }
+
+/* ---- Intestazione portale ---- */
+.page-header {
+  background: #003D7D;
+  color: white;
+  padding: 10px 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.page-header .logo-inps {
+  font-size: 1.4rem;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-right: 1px solid rgba(255,255,255,0.4);
+  padding-right: 16px;
+}
+.page-header .site-title { font-size: 0.95rem; }
+
+/* ---- Contenuto pagina ---- */
+.page-content {
+  max-width: 960px;
+  margin: 24px auto;
+  padding: 28px 32px;
+  background: white;
+  border: 1px solid #d5dde8;
+}
+
+/* ---- Titoli ---- */
+h1.page-title {
+  font-size: 1.35rem;
+  color: #003D7D;
+  border-bottom: 2px solid #003D7D;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+}
+h2.section-title {
+  font-size: 1.05rem;
+  color: #003D7D;
+  margin-bottom: 12px;
+  margin-top: 20px;
+}
+
+/* ---- Indicatore step (BARRIER b3: e' un <img>, non testo) ---- */
+.step-bar {
+  margin-bottom: 24px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid #e0e8f0;
+}
+
+/* ---- Form ---- */
+fieldset {
+  border: 1px solid #c8d8e8;
+  border-radius: 4px;
+  padding: 18px 20px;
+  margin-bottom: 20px;
+}
+legend {
+  font-weight: bold;
+  color: #003D7D;
+  padding: 0 8px;
+  font-size: 0.95rem;
+}
+.form-group { margin-bottom: 16px; }
+.form-group label {
+  display: block;
+  font-size: 0.88rem;
+  font-weight: bold;
+  margin-bottom: 4px;
+  color: #333;
+}
+.form-group input[type="text"],
+.form-group select,
+.form-group input[type="email"] {
+  width: 100%;
+  max-width: 420px;
+  padding: 8px 10px;
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  font-size: 0.95rem;
+}
+
+/* ---- Calendario visuale (BARRIER b4) ---- */
+.calendar-wrapper {
+  display: inline-block;
+  border: 1px solid #c8d8e8;
+  padding: 12px;
+  background: #fafcff;
+}
+.calendar-nav {
+  font-size: 0.85rem;
+  color: #444;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+.calendar-daynames {
+  display: grid;
+  grid-template-columns: repeat(7, 36px);
+  gap: 2px;
+  margin-bottom: 4px;
+}
+.calendar-daynames span {
+  width: 36px;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #777;
+  font-weight: bold;
+  padding: 3px 0;
+}
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 36px);
+  gap: 2px;
+}
+.calendar-grid div {
+  width: 36px;
+  height: 36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid #dde5ee;
+  background: #fff;
+  font-size: 0.85rem;
+}
+.calendar-grid div:hover { background: #dce8f5; }
+.calendar-grid div.selected { background: #003D7D; color: white; border-color: #003D7D; }
+.calendar-grid div.empty { border: none; background: none; cursor: default; }
+
+/* ---- Pulsanti ---- */
+.btn-primary {
+  background: #003D7D;
+  color: white;
+  border: none;
+  padding: 10px 28px;
+  font-size: 0.95rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn-primary:hover { background: #0055A5; }
+.btn-secondary {
+  background: #666;
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  font-size: 0.95rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+.btn-secondary:hover { background: #444; }
+
+/* ---- Navigazione passi ---- */
+.footer-nav {
+  margin-top: 24px;
+  padding-top: 16px;
+  border-top: 1px solid #e0e8f0;
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+
+/* ---- Info box ---- */
+.info-box {
+  background: #e8f0f9;
+  border-left: 4px solid #003D7D;
+  padding: 12px 16px;
+  margin: 14px 0;
+  font-size: 0.9rem;
+}
+
+/* ---- CTA ---- */
+a.cta-btn {
+  display: inline-block;
+  background: #003D7D;
+  color: white;
+  padding: 12px 30px;
+  text-decoration: none;
+  border-radius: 3px;
+  font-size: 1rem;
+  margin-top: 16px;
+}
+a.cta-btn:hover { background: #0055A5; }
+
+/* ---- Tabella importi (PNG wrapper) ---- */
+.tabella-importi { margin: 20px 0; }
+.tabella-importi img { max-width: 100%; border: 1px solid #c8d8e8; display: block; }
+
+/* ---- Protocollo ---- */
+.box-protocollo {
+  display: none;
+  background: #e6f4ea;
+  border: 2px solid #2e7d32;
+  border-radius: 4px;
+  padding: 20px 24px;
+  margin-top: 24px;
+}
+.box-protocollo h3 { color: #1b5e20; margin-bottom: 10px; }
+.box-protocollo .numero { font-size: 1.3rem; font-weight: bold; font-family: monospace; letter-spacing: 1px; }
+
+/* ---- Riepilogo ---- */
+.riepilogo-table { width: 100%; border-collapse: collapse; margin-bottom: 16px; }
+.riepilogo-table th, .riepilogo-table td {
+  padding: 8px 12px;
+  text-align: left;
+  border-bottom: 1px solid #e0e8f0;
+  font-size: 0.9rem;
+}
+.riepilogo-table th { width: 40%; color: #555; font-weight: bold; }
+
+/* ---- Nota replica ---- */
+.nota-replica {
+  font-size: 0.75rem;
+  color: #664;
+  border: 1px solid #ddd;
+  padding: 8px 12px;
+  margin-top: 32px;
+  background: #fffde7;
+}

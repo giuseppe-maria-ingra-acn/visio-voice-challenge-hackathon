@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Passo 2 — Dati dei figli — Assegno Unico INPS (Replica demo)</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+<div class="page-header">
+  <span class="logo-inps">INPS</span>
+  <span class="site-title">Istituto Nazionale della Previdenza Sociale</span>
+</div>
+
+<div class="page-content">
+  <h1 class="page-title">Domanda Assegno Unico Universale</h1>
+
+  <!--
+    BARRIER b3 — VISUAL_ONLY_STATE (step indicator)
+    Anche al passo 2, l'indicatore e' un PNG raster con alt="immagine".
+    NVDA annuncia: "immagine"
+    Marco non sa di essere al passo 2 di 5.
+  -->
+  <div class="step-bar">
+    <img src="step-indicator-2.png" alt="immagine">
+  </div>
+
+  <h2 class="section-title">Passo 2 — Dati dei figli a carico</h2>
+
+  <form id="form-step2" novalidate>
+
+    <fieldset>
+      <legend>Figlio 1 — Sofia Ferrari</legend>
+
+      <div class="form-group">
+        <label for="figlio1_cognome">Cognome *</label>
+        <input type="text" id="figlio1_cognome" name="figlio1_cognome" value="Ferrari">
+      </div>
+
+      <div class="form-group">
+        <label for="figlio1_nome">Nome *</label>
+        <input type="text" id="figlio1_nome" name="figlio1_nome" value="Sofia">
+      </div>
+
+      <div class="form-group">
+        <label for="figlio1_cf">Codice fiscale *</label>
+        <input type="text" id="figlio1_cf" name="figlio1_cf"
+               value="FRRSFR19C55A944K" maxlength="16"
+               style="text-transform:uppercase; font-family:monospace; font-size:1rem;">
+      </div>
+
+      <div class="form-group">
+        <label for="figlio1_nascita">Data di nascita *</label>
+        <input type="text" id="figlio1_nascita" name="figlio1_nascita"
+               value="15/03/2019" placeholder="GG/MM/AAAA">
+      </div>
+
+    </fieldset>
+
+    <fieldset>
+      <legend>Figlio 2 — Elia Ferrari</legend>
+
+      <div class="form-group">
+        <label for="figlio2_cognome">Cognome *</label>
+        <input type="text" id="figlio2_cognome" name="figlio2_cognome" value="Ferrari">
+      </div>
+
+      <div class="form-group">
+        <label for="figlio2_nome">Nome *</label>
+        <input type="text" id="figlio2_nome" name="figlio2_nome" value="Elia">
+      </div>
+
+      <div class="form-group">
+        <label for="figlio2_cf">Codice fiscale *</label>
+        <input type="text" id="figlio2_cf" name="figlio2_cf"
+               value="FRRLEL22R22A944J" maxlength="16"
+               style="text-transform:uppercase; font-family:monospace; font-size:1rem;">
+      </div>
+
+      <div class="form-group">
+        <label for="figlio2_nascita">Data di nascita *</label>
+        <input type="text" id="figlio2_nascita" name="figlio2_nascita"
+               value="22/06/2022" placeholder="GG/MM/AAAA">
+      </div>
+
+    </fieldset>
+
+    <div class="footer-nav">
+      <a href="step1.html">
+        <button type="button" class="btn-secondary">&#8592; Indietro</button>
+      </a>
+      <button type="button" class="btn-primary" onclick="window.location.href='step3.html'">
+        Avanti &#8594;
+      </button>
+    </div>
+  </form>
+
+  <div class="nota-replica">
+    <strong>REPLICA DEMO</strong> — Passo 2: i campi dei figli hanno label accessibili corrette
+    (questa sezione non e' la barriera principale). La barriera b3 e' l'indicatore di step
+    in cima alla pagina.
+  </div>
+</div>
+
+<script src="/visiovoice.js"></script>
+</body>
+</html>

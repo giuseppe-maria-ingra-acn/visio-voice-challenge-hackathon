@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Passo 3 — Situazione ISEE — Assegno Unico INPS (Replica demo)</title>
+  <link rel="stylesheet" href="demo.css">
+</head>
+<body>
+
+<div class="page-header">
+  <span class="logo-inps">INPS</span>
+  <span class="site-title">Istituto Nazionale della Previdenza Sociale</span>
+</div>
+
+<div class="page-content">
+  <h1 class="page-title">Domanda Assegno Unico Universale</h1>
+
+  <!--
+    BARRIER b3 — VISUAL_ONLY_STATE (step indicator)
+    PNG raster con alt="immagine". Marco non sa di essere al passo 3 di 5.
+  -->
+  <div class="step-bar">
+    <img src="step-indicator-3.png" alt="immagine">
+  </div>
+
+  <h2 class="section-title">Passo 3 — Situazione reddituale (ISEE)</h2>
+
+  <div class="info-box">
+    <strong>Nota:</strong> Se non si dispone di ISEE in corso di validita' o si supera la
+    soglia massima, viene erogato l'importo minimo di <strong>58,30 euro</strong> per figlio.
+    Per ricevere importi piu' elevati e' necessario presentare la DSU entro il
+    <strong>28 febbraio</strong> di ogni anno.
+  </div>
+
+  <form id="form-step3" novalidate>
+    <fieldset>
+      <legend>Attestazione ISEE</legend>
+
+      <div class="form-group">
+        <label for="isee_valore">Valore ISEE (in euro) — lasciare vuoto se non disponibile</label>
+        <input type="text" id="isee_valore" name="isee_valore"
+               value="25.000,00" placeholder="es. 25.000,00"
+               style="font-family:monospace; font-size:1rem;">
+      </div>
+
+      <div class="form-group">
+        <label for="dsu_numero">Numero DSU</label>
+        <input type="text" id="dsu_numero" name="dsu_numero"
+               value="INPS-DSU-2026-IT-123456789"
+               style="font-family:monospace; font-size:0.9rem; max-width:520px;">
+      </div>
+
+    </fieldset>
+
+    <div class="footer-nav">
+      <a href="step2.html">
+        <button type="button" class="btn-secondary">&#8592; Indietro</button>
+      </a>
+      <button type="button" class="btn-primary" onclick="window.location.href='step4.html'">
+        Avanti &#8594;
+      </button>
+    </div>
+  </form>
+
+  <div class="nota-replica">
+    <strong>REPLICA DEMO</strong> — Passo 3: i campi ISEE hanno label accessibili.
+    La barriera b3 (step indicator come immagine) e' attiva in cima alla pagina.
+  </div>
+</div>
+
+<script src="/visiovoice.js"></script>
+</body>
+</html>
