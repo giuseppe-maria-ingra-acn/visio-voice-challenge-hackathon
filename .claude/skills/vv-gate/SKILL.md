@@ -5,6 +5,8 @@ description: Fase 4 di VisioVoice - esegue tutti i gate di qualita', lancia l'au
 
 # Gate — la verifica indipendente
 
+Strategia completa e limiti dichiarati: [`docs/COME-TESTARE.md`](../../../docs/COME-TESTARE.md)
+
 ## 1. I controlli automatici, tutti insieme
 
 ```bash

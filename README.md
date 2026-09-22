@@ -117,8 +117,11 @@ fixture, ed è il default — la demo non dipende dalla rete.
 
 ```bash
 mvn -q test             # tutti i gate, invariante di provenance compreso
-mvn spring-boot:run     # http://localhost:8080
+mvn spring-boot:run     # poi http://localhost:8080/demo/
 ```
+
+Strategia di test completa, e cosa non e' automatizzabile:
+[docs/COME-TESTARE.md](docs/COME-TESTARE.md)
 
 ## Stack
 

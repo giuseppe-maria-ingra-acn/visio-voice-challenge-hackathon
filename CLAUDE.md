@@ -97,6 +97,7 @@ Orchestratore = il thread principale. Gli agenti stanno in `.claude/agents/`, i 
 fase in `.claude/skills/`.
 
 - **Come si lancia, passo per passo: `docs/GUIDA-OPERATIVA.md`** (comandi e prompt pronti)
+- **Come si testa, e cosa non e' automatizzabile: `docs/COME-TESTARE.md`**
 - Mappa della squadra, perimetri e dipendenze: `docs/AGENT-TEAM.md`
 - Tabella di marcia e budget di tempo: `docs/PLAN.md`
 
