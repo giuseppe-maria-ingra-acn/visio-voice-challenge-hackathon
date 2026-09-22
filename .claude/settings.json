@@ -1,0 +1,79 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Bash(mvn *)",
+      "Bash(java *)",
+      "Bash(javac *)",
+      "Bash(python *)",
+      "Bash(grep *)",
+      "Bash(find *)",
+      "Bash(ls *)",
+      "Bash(cat *)",
+      "Bash(head *)",
+      "Bash(tail *)",
+      "Bash(wc *)",
+      "Bash(git status)",
+      "Bash(git diff *)",
+      "Bash(git log *)",
+      "Read",
+      "Edit(src/**)",
+      "Edit(docs/**)",
+      "Edit(pom.xml)"
+    ],
+    "deny": [
+      "Bash(git push *)",
+      "Bash(mvn deploy *)"
+    ]
+  },
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash .claude/hooks/session-context.sh",
+            "timeout": 15,
+            "statusMessage": "Carico persona e stato del progetto..."
+          }
+        ]
+      }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Edit|Write",
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash .claude/hooks/invariant-guard.sh",
+            "timeout": 20,
+            "statusMessage": "Verifico gli invarianti..."
+          },
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash .claude/hooks/java-build-gate.sh",
+            "timeout": 180,
+            "asyncRewake": true,
+            "statusMessage": "Compilo il codice Java..."
+          }
+        ]
+      }
+    ],
+    "SubagentStop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "shell": "bash",
+            "command": "bash .claude/hooks/agent-activity.sh",
+            "timeout": 10,
+            "async": true
+          }
+        ]
+      }
+    ]
+  }
+}
