@@ -1,6 +1,9 @@
 # Build Maven
 target/
 
+# Output di Eclipse: duplica l'intero progetto
+bin/
+
 # Artefatti generati durante lo sviluppo
 docs/.agent-activity.log
 
